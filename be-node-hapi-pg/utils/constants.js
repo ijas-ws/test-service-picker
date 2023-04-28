@@ -43,7 +43,7 @@ export const DEFAULT_METADATA_OPTIONS = {
 
 export const TEST_USER_DATE = {
   id: 1,
-  first_name: 'mac',
+  first_name: 'ijas',
   last_name: 'mac',
   email: 'mac@wednesday.is',
 };
