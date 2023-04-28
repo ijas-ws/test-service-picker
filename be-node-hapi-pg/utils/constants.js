@@ -40,3 +40,10 @@ export const DEFAULT_METADATA_OPTIONS = {
   scope: SCOPE_TYPE.ADMIN,
   resourceType: OAUTH_CLIENT_ID,
 };
+
+export const TEST_USER_DATE = {
+  id: 1,
+  first_name: 'ijas',
+  last_name: 'mac',
+  email: 'mac@wednesday.is',
+};
