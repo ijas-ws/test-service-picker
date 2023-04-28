@@ -1,0 +1,3879 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "dev-web-app-FeNextJsWeb": {
+        "id": "dev-web-app-FeNextJsWeb",
+        "path": "dev-web-app-FeNextJsWeb",
+        "children": {
+          "CustomResourceHandler": {
+            "id": "CustomResourceHandler",
+            "path": "dev-web-app-FeNextJsWeb/CustomResourceHandler",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "dev-web-app-FeNextJsWeb/CustomResourceHandler/ServiceRole",
+                "children": {
+                  "ImportServiceRole": {
+                    "id": "ImportServiceRole",
+                    "path": "dev-web-app-FeNextJsWeb/CustomResourceHandler/ServiceRole/ImportServiceRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.72.1"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "dev-web-app-FeNextJsWeb/CustomResourceHandler/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.72.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.72.1"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "dev-web-app-FeNextJsWeb/CustomResourceHandler/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "dev-web-app-FeNextJsWeb/CustomResourceHandler/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.72.1"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "dev-web-app-FeNextJsWeb/CustomResourceHandler/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.72.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.72.1"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "dev-web-app-FeNextJsWeb/CustomResourceHandler/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": "cdk-hnb659fds-assets-511522223657-ap-south-1",
+                      "s3Key": "e380bf7a6f7d47034129a48fb148f29d25417026f0a91e23d9e9f2473adc700d.zip"
+                    },
+                    "role": {
+                      "Fn::GetAtt": [
+                        "CustomResourceHandlerServiceRole41AEC181",
+                        "Arn"
+                      ]
+                    },
+                    "handler": "index.handler",
+                    "memorySize": 1024,
+                    "runtime": "nodejs16.x",
+                    "tags": [
+                      {
+                        "key": "sst:app",
+                        "value": "web-app"
+                      },
+                      {
+                        "key": "sst:stage",
+                        "value": "dev"
+                      }
+                    ],
+                    "timeout": 900
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.72.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.72.1"
+            }
+          },
+          "FeNextJsWebSite": {
+            "id": "FeNextJsWebSite",
+            "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite",
+            "children": {
+              "AwsCliLayer": {
+                "id": "AwsCliLayer",
+                "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/AwsCliLayer",
+                "children": {
+                  "Code": {
+                    "id": "Code",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/AwsCliLayer/Code",
+                    "children": {
+                      "Stage": {
+                        "id": "Stage",
+                        "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/AwsCliLayer/Code/Stage",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.AssetStaging",
+                          "version": "2.72.1"
+                        }
+                      },
+                      "AssetBucket": {
+                        "id": "AssetBucket",
+                        "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/AwsCliLayer/Code/AssetBucket",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                          "version": "2.72.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                      "version": "2.72.1"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/AwsCliLayer/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::LayerVersion",
+                      "aws:cdk:cloudformation:props": {
+                        "content": {
+                          "s3Bucket": "cdk-hnb659fds-assets-511522223657-ap-south-1",
+                          "s3Key": "ae425a54db1deda1936d2f7a541020d40ec5b16e8334c1c068761a8fafa0275f.zip"
+                        },
+                        "description": "/opt/awscli/aws"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnLayerVersion",
+                      "version": "2.72.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.lambda_layer_awscli.AwsCliLayer",
+                  "version": "2.72.1"
+                }
+              },
+              "Asset0": {
+                "id": "Asset0",
+                "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/Asset0",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/Asset0/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.72.1"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/Asset0/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.72.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.72.1"
+                }
+              },
+              "AssetFilenames": {
+                "id": "AssetFilenames",
+                "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/AssetFilenames",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/AssetFilenames/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.72.1"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/AssetFilenames/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.72.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.72.1"
+                }
+              },
+              "S3Bucket": {
+                "id": "S3Bucket",
+                "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Bucket",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Bucket/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
+                      "aws:cdk:cloudformation:props": {
+                        "bucketName": "fe-next-js-web-develop",
+                        "publicAccessBlockConfiguration": {
+                          "blockPublicAcls": true,
+                          "blockPublicPolicy": true,
+                          "ignorePublicAcls": true,
+                          "restrictPublicBuckets": true
+                        },
+                        "tags": [
+                          {
+                            "key": "aws-cdk:auto-delete-objects",
+                            "value": "true"
+                          },
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
+                      "version": "2.72.1"
+                    }
+                  },
+                  "Policy": {
+                    "id": "Policy",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Bucket/Policy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Bucket/Policy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::S3::BucketPolicy",
+                          "aws:cdk:cloudformation:props": {
+                            "bucket": {
+                              "Ref": "FeNextJsWebSiteS3BucketDD4A31F5"
+                            },
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "s3:GetBucket*",
+                                    "s3:List*",
+                                    "s3:DeleteObject*"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "AWS": {
+                                      "Fn::GetAtt": [
+                                        "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+                                        "Arn"
+                                      ]
+                                    }
+                                  },
+                                  "Resource": [
+                                    {
+                                      "Fn::GetAtt": [
+                                        "FeNextJsWebSiteS3BucketDD4A31F5",
+                                        "Arn"
+                                      ]
+                                    },
+                                    {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          {
+                                            "Fn::GetAtt": [
+                                              "FeNextJsWebSiteS3BucketDD4A31F5",
+                                              "Arn"
+                                            ]
+                                          },
+                                          "/*"
+                                        ]
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "Action": "s3:GetObject",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "CanonicalUser": {
+                                      "Fn::GetAtt": [
+                                        "FeNextJsWebSiteDistributionOrigin1S3Origin5A251E8C",
+                                        "S3CanonicalUserId"
+                                      ]
+                                    }
+                                  },
+                                  "Resource": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        {
+                                          "Fn::GetAtt": [
+                                            "FeNextJsWebSiteS3BucketDD4A31F5",
+                                            "Arn"
+                                          ]
+                                        },
+                                        "/*"
+                                      ]
+                                    ]
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3.CfnBucketPolicy",
+                          "version": "2.72.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketPolicy",
+                      "version": "2.72.1"
+                    }
+                  },
+                  "AutoDeleteObjectsCustomResource": {
+                    "id": "AutoDeleteObjectsCustomResource",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Bucket/AutoDeleteObjectsCustomResource",
+                    "children": {
+                      "Default": {
+                        "id": "Default",
+                        "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Bucket/AutoDeleteObjectsCustomResource/Default",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.CfnResource",
+                          "version": "2.72.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CustomResource",
+                      "version": "2.72.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3.Bucket",
+                  "version": "2.72.1"
+                }
+              },
+              "S3Uploader": {
+                "id": "S3Uploader",
+                "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Uploader",
+                "children": {
+                  "ServiceRole": {
+                    "id": "ServiceRole",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Uploader/ServiceRole",
+                    "children": {
+                      "ImportServiceRole": {
+                        "id": "ImportServiceRole",
+                        "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Uploader/ServiceRole/ImportServiceRole",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.Resource",
+                          "version": "2.72.1"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Uploader/ServiceRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "lambda.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "managedPolicyArns": [
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                                  ]
+                                ]
+                              }
+                            ],
+                            "tags": [
+                              {
+                                "key": "sst:app",
+                                "value": "web-app"
+                              },
+                              {
+                                "key": "sst:stage",
+                                "value": "dev"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.72.1"
+                        }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Uploader/ServiceRole/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Uploader/ServiceRole/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": [
+                                        "s3:GetObject*",
+                                        "s3:GetBucket*",
+                                        "s3:List*",
+                                        "s3:DeleteObject*",
+                                        "s3:PutObject",
+                                        "s3:PutObjectLegalHold",
+                                        "s3:PutObjectRetention",
+                                        "s3:PutObjectTagging",
+                                        "s3:PutObjectVersionTagging",
+                                        "s3:Abort*"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": [
+                                        {
+                                          "Fn::GetAtt": [
+                                            "FeNextJsWebSiteS3BucketDD4A31F5",
+                                            "Arn"
+                                          ]
+                                        },
+                                        {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              {
+                                                "Fn::GetAtt": [
+                                                  "FeNextJsWebSiteS3BucketDD4A31F5",
+                                                  "Arn"
+                                                ]
+                                              },
+                                              "/*"
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "Action": [
+                                        "s3:GetObject*",
+                                        "s3:GetBucket*",
+                                        "s3:List*"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": [
+                                        {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              "arn:",
+                                              {
+                                                "Ref": "AWS::Partition"
+                                              },
+                                              ":s3:::cdk-hnb659fds-assets-511522223657-ap-south-1"
+                                            ]
+                                          ]
+                                        },
+                                        {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              "arn:",
+                                              {
+                                                "Ref": "AWS::Partition"
+                                              },
+                                              ":s3:::cdk-hnb659fds-assets-511522223657-ap-south-1/*"
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "FeNextJsWebSiteS3UploaderServiceRoleDefaultPolicy1F6F01C3",
+                                "roles": [
+                                  {
+                                    "Ref": "FeNextJsWebSiteS3UploaderServiceRole5575E6B0"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                              "version": "2.72.1"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Policy",
+                          "version": "2.72.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.72.1"
+                    }
+                  },
+                  "Code": {
+                    "id": "Code",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Uploader/Code",
+                    "children": {
+                      "Stage": {
+                        "id": "Stage",
+                        "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Uploader/Code/Stage",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.AssetStaging",
+                          "version": "2.72.1"
+                        }
+                      },
+                      "AssetBucket": {
+                        "id": "AssetBucket",
+                        "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Uploader/Code/AssetBucket",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                          "version": "2.72.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                      "version": "2.72.1"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Uploader/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                      "aws:cdk:cloudformation:props": {
+                        "code": {
+                          "s3Bucket": "cdk-hnb659fds-assets-511522223657-ap-south-1",
+                          "s3Key": "5314dd0b83a9c16d227872e4b881e96d2361ae01b02d8bdc3b24c30fd31aa758.zip"
+                        },
+                        "role": {
+                          "Fn::GetAtt": [
+                            "FeNextJsWebSiteS3UploaderServiceRole5575E6B0",
+                            "Arn"
+                          ]
+                        },
+                        "handler": "s3-upload.handler",
+                        "layers": [
+                          {
+                            "Ref": "FeNextJsWebSiteAwsCliLayerF5B94C8C"
+                          }
+                        ],
+                        "memorySize": 1024,
+                        "runtime": "python3.7",
+                        "tags": [
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ],
+                        "timeout": 900
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                      "version": "2.72.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.Function",
+                  "version": "2.72.1"
+                }
+              },
+              "S3Handler": {
+                "id": "S3Handler",
+                "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Handler",
+                "children": {
+                  "ServiceRole": {
+                    "id": "ServiceRole",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Handler/ServiceRole",
+                    "children": {
+                      "ImportServiceRole": {
+                        "id": "ImportServiceRole",
+                        "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Handler/ServiceRole/ImportServiceRole",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.Resource",
+                          "version": "2.72.1"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Handler/ServiceRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "lambda.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "managedPolicyArns": [
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                                  ]
+                                ]
+                              }
+                            ],
+                            "tags": [
+                              {
+                                "key": "sst:app",
+                                "value": "web-app"
+                              },
+                              {
+                                "key": "sst:stage",
+                                "value": "dev"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.72.1"
+                        }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Handler/ServiceRole/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Handler/ServiceRole/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": [
+                                        "s3:GetObject*",
+                                        "s3:GetBucket*",
+                                        "s3:List*",
+                                        "s3:DeleteObject*",
+                                        "s3:PutObject",
+                                        "s3:PutObjectLegalHold",
+                                        "s3:PutObjectRetention",
+                                        "s3:PutObjectTagging",
+                                        "s3:PutObjectVersionTagging",
+                                        "s3:Abort*"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": [
+                                        {
+                                          "Fn::GetAtt": [
+                                            "FeNextJsWebSiteS3BucketDD4A31F5",
+                                            "Arn"
+                                          ]
+                                        },
+                                        {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              {
+                                                "Fn::GetAtt": [
+                                                  "FeNextJsWebSiteS3BucketDD4A31F5",
+                                                  "Arn"
+                                                ]
+                                              },
+                                              "/*"
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "Action": [
+                                        "s3:GetObject*",
+                                        "s3:GetBucket*",
+                                        "s3:List*"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": [
+                                        {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              "arn:",
+                                              {
+                                                "Ref": "AWS::Partition"
+                                              },
+                                              ":s3:::cdk-hnb659fds-assets-511522223657-ap-south-1"
+                                            ]
+                                          ]
+                                        },
+                                        {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              "arn:",
+                                              {
+                                                "Ref": "AWS::Partition"
+                                              },
+                                              ":s3:::cdk-hnb659fds-assets-511522223657-ap-south-1/*"
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "Action": "lambda:InvokeFunction",
+                                      "Effect": "Allow",
+                                      "Resource": [
+                                        {
+                                          "Fn::GetAtt": [
+                                            "FeNextJsWebSiteS3Uploader7A776442",
+                                            "Arn"
+                                          ]
+                                        },
+                                        {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              {
+                                                "Fn::GetAtt": [
+                                                  "FeNextJsWebSiteS3Uploader7A776442",
+                                                  "Arn"
+                                                ]
+                                              },
+                                              ":*"
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "FeNextJsWebSiteS3HandlerServiceRoleDefaultPolicyCEE706C8",
+                                "roles": [
+                                  {
+                                    "Ref": "FeNextJsWebSiteS3HandlerServiceRole8612F454"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                              "version": "2.72.1"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Policy",
+                          "version": "2.72.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.72.1"
+                    }
+                  },
+                  "Code": {
+                    "id": "Code",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Handler/Code",
+                    "children": {
+                      "Stage": {
+                        "id": "Stage",
+                        "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Handler/Code/Stage",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.AssetStaging",
+                          "version": "2.72.1"
+                        }
+                      },
+                      "AssetBucket": {
+                        "id": "AssetBucket",
+                        "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Handler/Code/AssetBucket",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                          "version": "2.72.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                      "version": "2.72.1"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Handler/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                      "aws:cdk:cloudformation:props": {
+                        "code": {
+                          "s3Bucket": "cdk-hnb659fds-assets-511522223657-ap-south-1",
+                          "s3Key": "5314dd0b83a9c16d227872e4b881e96d2361ae01b02d8bdc3b24c30fd31aa758.zip"
+                        },
+                        "role": {
+                          "Fn::GetAtt": [
+                            "FeNextJsWebSiteS3HandlerServiceRole8612F454",
+                            "Arn"
+                          ]
+                        },
+                        "environment": {
+                          "variables": {
+                            "UPLOADER_FUNCTION_NAME": {
+                              "Ref": "FeNextJsWebSiteS3Uploader7A776442"
+                            }
+                          }
+                        },
+                        "handler": "s3-handler.handler",
+                        "layers": [
+                          {
+                            "Ref": "FeNextJsWebSiteAwsCliLayerF5B94C8C"
+                          }
+                        ],
+                        "memorySize": 1024,
+                        "runtime": "python3.7",
+                        "tags": [
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ],
+                        "timeout": 900
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                      "version": "2.72.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.Function",
+                  "version": "2.72.1"
+                }
+              },
+              "S3Deployment": {
+                "id": "S3Deployment",
+                "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Deployment",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Deployment/Default",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.72.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CustomResource",
+                  "version": "2.72.1"
+                }
+              },
+              "CloudFrontFunction": {
+                "id": "CloudFrontFunction",
+                "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/CloudFrontFunction",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/CloudFrontFunction/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::CloudFront::Function",
+                      "aws:cdk:cloudformation:props": {
+                        "functionCode": "\nfunction handler(event) {\n  var request = event.request;\n  var uri = request.uri;\n  \n  if (uri.endsWith(\"/\")) {\n    request.uri += \"index.html\";\n  } else if (!uri.split(\"/\").pop().includes(\".\")) {\n    request.uri += \".html\";\n  }\n\n  return request;\n}\n          ",
+                        "functionConfig": {
+                          "comment": "ap-south-1devwebappFeNextJsWebFeebSiteCloudFrontFunction6AA7FC35",
+                          "runtime": "cloudfront-js-1.0"
+                        },
+                        "name": "ap-south-1devwebappFeNextJsWebFeebSiteCloudFrontFunction6AA7FC35",
+                        "autoPublish": true
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudfront.CfnFunction",
+                      "version": "2.72.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cloudfront.Function",
+                  "version": "2.72.1"
+                }
+              },
+              "Distribution": {
+                "id": "Distribution",
+                "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/Distribution",
+                "children": {
+                  "Origin1": {
+                    "id": "Origin1",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/Distribution/Origin1",
+                    "children": {
+                      "S3Origin": {
+                        "id": "S3Origin",
+                        "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/Distribution/Origin1/S3Origin",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/Distribution/Origin1/S3Origin/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+                              "aws:cdk:cloudformation:props": {
+                                "cloudFrontOriginAccessIdentityConfig": {
+                                  "comment": "Identity for devwebappFeNextJsWebFeNextJsWebSiteDistributionOrigin16B99C803"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_cloudfront.CfnCloudFrontOriginAccessIdentity",
+                              "version": "2.72.1"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_cloudfront.OriginAccessIdentity",
+                          "version": "2.72.1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "constructs.Construct",
+                      "version": "10.1.156"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/Distribution/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::CloudFront::Distribution",
+                      "aws:cdk:cloudformation:props": {
+                        "distributionConfig": {
+                          "enabled": true,
+                          "origins": [
+                            {
+                              "domainName": {
+                                "Fn::GetAtt": [
+                                  "FeNextJsWebSiteS3BucketDD4A31F5",
+                                  "RegionalDomainName"
+                                ]
+                              },
+                              "id": "devwebappFeNextJsWebFeNextJsWebSiteDistributionOrigin16B99C803",
+                              "s3OriginConfig": {
+                                "originAccessIdentity": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "origin-access-identity/cloudfront/",
+                                      {
+                                        "Ref": "FeNextJsWebSiteDistributionOrigin1S3Origin5A251E8C"
+                                      }
+                                    ]
+                                  ]
+                                }
+                              }
+                            }
+                          ],
+                          "defaultCacheBehavior": {
+                            "pathPattern": "*",
+                            "targetOriginId": "devwebappFeNextJsWebFeNextJsWebSiteDistributionOrigin16B99C803",
+                            "cachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+                            "compress": true,
+                            "viewerProtocolPolicy": "redirect-to-https",
+                            "functionAssociations": [
+                              {
+                                "functionArn": {
+                                  "Fn::GetAtt": [
+                                    "FeNextJsWebSiteCloudFrontFunctionB44F3D97",
+                                    "FunctionARN"
+                                  ]
+                                },
+                                "eventType": "viewer-request"
+                              }
+                            ]
+                          },
+                          "aliases": [],
+                          "comment": "Distribution for fe-next-js-web-develop",
+                          "customErrorResponses": [
+                            {
+                              "errorCode": 403,
+                              "responseCode": 200,
+                              "responsePagePath": "/index.html"
+                            },
+                            {
+                              "errorCode": 404,
+                              "responseCode": 200,
+                              "responsePagePath": "/index.html"
+                            }
+                          ],
+                          "defaultRootObject": "index.html",
+                          "httpVersion": "http2",
+                          "ipv6Enabled": true
+                        },
+                        "tags": [
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_cloudfront.CfnDistribution",
+                      "version": "2.72.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_cloudfront.Distribution",
+                  "version": "2.72.1"
+                }
+              },
+              "CloudFrontInvalidatorPolicy": {
+                "id": "CloudFrontInvalidatorPolicy",
+                "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/CloudFrontInvalidatorPolicy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/CloudFrontInvalidatorPolicy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                      "aws:cdk:cloudformation:props": {
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": [
+                                "cloudfront:GetInvalidation",
+                                "cloudfront:CreateInvalidation"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":cloudfront::511522223657:distribution/",
+                                    {
+                                      "Ref": "FeNextJsWebSiteDistributionA2A9018B"
+                                    }
+                                  ]
+                                ]
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "policyName": "FeNextJsWebSiteCloudFrontInvalidatorPolicy1CA924F1",
+                        "roles": [
+                          {
+                            "Ref": "CustomResourceHandlerServiceRole41AEC181"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                      "version": "2.72.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Policy",
+                  "version": "2.72.1"
+                }
+              },
+              "CloudFrontInvalidator": {
+                "id": "CloudFrontInvalidator",
+                "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/CloudFrontInvalidator",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/CloudFrontInvalidator/Default",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.CfnResource",
+                      "version": "2.72.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CustomResource",
+                  "version": "2.72.1"
+                }
+              },
+              "Parameter_url": {
+                "id": "Parameter_url",
+                "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/Parameter_url",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "dev-web-app-FeNextJsWeb/FeNextJsWebSite/Parameter_url/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
+                      "aws:cdk:cloudformation:props": {
+                        "type": "String",
+                        "value": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "https://",
+                              {
+                                "Fn::GetAtt": [
+                                  "FeNextJsWebSiteDistributionA2A9018B",
+                                  "DomainName"
+                                ]
+                              }
+                            ]
+                          ]
+                        },
+                        "name": "/sst/web-app/dev/StaticSite/FeNextJsWebSite/url",
+                        "tags": {
+                          "sst:app": "web-app",
+                          "sst:stage": "dev"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
+                      "version": "2.72.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
+                  "version": "2.72.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.1.156"
+            }
+          },
+          "Custom::S3AutoDeleteObjectsCustomResourceProvider": {
+            "id": "Custom::S3AutoDeleteObjectsCustomResourceProvider",
+            "path": "dev-web-app-FeNextJsWeb/Custom::S3AutoDeleteObjectsCustomResourceProvider",
+            "children": {
+              "Staging": {
+                "id": "Staging",
+                "path": "dev-web-app-FeNextJsWeb/Custom::S3AutoDeleteObjectsCustomResourceProvider/Staging",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.AssetStaging",
+                  "version": "2.72.1"
+                }
+              },
+              "Role": {
+                "id": "Role",
+                "path": "dev-web-app-FeNextJsWeb/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.72.1"
+                }
+              },
+              "Handler": {
+                "id": "Handler",
+                "path": "dev-web-app-FeNextJsWeb/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.72.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CustomResourceProvider",
+              "version": "2.72.1"
+            }
+          },
+          "SSTStackOutputSiteUrl": {
+            "id": "SSTStackOutputSiteUrl",
+            "path": "dev-web-app-FeNextJsWeb/SSTStackOutputSiteUrl",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.72.1"
+            }
+          },
+          "SSTStackOutputdistributionId": {
+            "id": "SSTStackOutputdistributionId",
+            "path": "dev-web-app-FeNextJsWeb/SSTStackOutputdistributionId",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.72.1"
+            }
+          },
+          "SSTStackOutputbucketName": {
+            "id": "SSTStackOutputbucketName",
+            "path": "dev-web-app-FeNextJsWeb/SSTStackOutputbucketName",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.72.1"
+            }
+          },
+          "SSTStackOutputSSTMetadata": {
+            "id": "SSTStackOutputSSTMetadata",
+            "path": "dev-web-app-FeNextJsWeb/SSTStackOutputSSTMetadata",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.72.1"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "dev-web-app-FeNextJsWeb/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.72.1"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "dev-web-app-FeNextJsWeb/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.72.1"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.72.1"
+        }
+      },
+      "dev-web-app-BeNodeHapiPg": {
+        "id": "dev-web-app-BeNodeHapiPg",
+        "path": "dev-web-app-BeNodeHapiPg",
+        "children": {
+          "CustomResourceHandler": {
+            "id": "CustomResourceHandler",
+            "path": "dev-web-app-BeNodeHapiPg/CustomResourceHandler",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "dev-web-app-BeNodeHapiPg/CustomResourceHandler/ServiceRole",
+                "children": {
+                  "ImportServiceRole": {
+                    "id": "ImportServiceRole",
+                    "path": "dev-web-app-BeNodeHapiPg/CustomResourceHandler/ServiceRole/ImportServiceRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.72.1"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "dev-web-app-BeNodeHapiPg/CustomResourceHandler/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.72.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.72.1"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "dev-web-app-BeNodeHapiPg/CustomResourceHandler/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "dev-web-app-BeNodeHapiPg/CustomResourceHandler/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.72.1"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "dev-web-app-BeNodeHapiPg/CustomResourceHandler/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.72.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.72.1"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "dev-web-app-BeNodeHapiPg/CustomResourceHandler/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": "cdk-hnb659fds-assets-511522223657-ap-south-1",
+                      "s3Key": "4ed08e2ef7e90b87425eb697b20beb1d32e59b875b2fb53103465ca3b6aa94c9.zip"
+                    },
+                    "role": {
+                      "Fn::GetAtt": [
+                        "CustomResourceHandlerServiceRole41AEC181",
+                        "Arn"
+                      ]
+                    },
+                    "handler": "index.handler",
+                    "memorySize": 1024,
+                    "runtime": "nodejs16.x",
+                    "tags": [
+                      {
+                        "key": "sst:app",
+                        "value": "web-app"
+                      },
+                      {
+                        "key": "sst:stage",
+                        "value": "dev"
+                      }
+                    ],
+                    "timeout": 900
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.72.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.72.1"
+            }
+          },
+          "be-develop-vpc": {
+            "id": "be-develop-vpc",
+            "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPC",
+                  "aws:cdk:cloudformation:props": {
+                    "cidrBlock": "10.0.0.0/16",
+                    "enableDnsHostnames": true,
+                    "enableDnsSupport": true,
+                    "instanceTenancy": "default",
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "dev-web-app-BeNodeHapiPg/be-develop-vpc"
+                      },
+                      {
+                        "key": "sst:app",
+                        "value": "web-app"
+                      },
+                      {
+                        "key": "sst:stage",
+                        "value": "dev"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPC",
+                  "version": "2.62.2"
+                }
+              },
+              "public-subnetSubnet1": {
+                "id": "public-subnetSubnet1",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "bedevelopvpc76CB6355"
+                        },
+                        "availabilityZone": "ap-south-1a",
+                        "cidrBlock": "10.0.0.0/24",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "public-subnet"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1"
+                          },
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "bedevelopvpc76CB6355"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1"
+                          },
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "bedevelopvpcpublicsubnetSubnet1RouteTableE1044599"
+                        },
+                        "subnetId": {
+                          "Ref": "bedevelopvpcpublicsubnetSubnet1SubnetB0121C69"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "bedevelopvpcpublicsubnetSubnet1RouteTableE1044599"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "bedevelopvpcIGW1587A902"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "EIP": {
+                    "id": "EIP",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1/EIP",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
+                      "aws:cdk:cloudformation:props": {
+                        "domain": "vpc",
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1"
+                          },
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "NATGateway": {
+                    "id": "NATGateway",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1/NATGateway",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
+                      "aws:cdk:cloudformation:props": {
+                        "subnetId": {
+                          "Ref": "bedevelopvpcpublicsubnetSubnet1SubnetB0121C69"
+                        },
+                        "allocationId": {
+                          "Fn::GetAtt": [
+                            "bedevelopvpcpublicsubnetSubnet1EIP1377ABBB",
+                            "AllocationId"
+                          ]
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1"
+                          },
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
+                      "version": "2.62.2"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.62.2"
+                }
+              },
+              "public-subnetSubnet2": {
+                "id": "public-subnetSubnet2",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "bedevelopvpc76CB6355"
+                        },
+                        "availabilityZone": "ap-south-1b",
+                        "cidrBlock": "10.0.1.0/24",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "public-subnet"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet2"
+                          },
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "bedevelopvpc76CB6355"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet2"
+                          },
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "bedevelopvpcpublicsubnetSubnet2RouteTable2DBEABCE"
+                        },
+                        "subnetId": {
+                          "Ref": "bedevelopvpcpublicsubnetSubnet2Subnet07F44778"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "bedevelopvpcpublicsubnetSubnet2RouteTable2DBEABCE"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "bedevelopvpcIGW1587A902"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.62.2"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.62.2"
+                }
+              },
+              "public-subnetSubnet3": {
+                "id": "public-subnetSubnet3",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet3",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet3/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "bedevelopvpc76CB6355"
+                        },
+                        "availabilityZone": "ap-south-1c",
+                        "cidrBlock": "10.0.2.0/24",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "public-subnet"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet3"
+                          },
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet3/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet3/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "bedevelopvpc76CB6355"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet3"
+                          },
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet3/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "bedevelopvpcpublicsubnetSubnet3RouteTableC53902EA"
+                        },
+                        "subnetId": {
+                          "Ref": "bedevelopvpcpublicsubnetSubnet3SubnetFB4EA845"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet3/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "bedevelopvpcpublicsubnetSubnet3RouteTableC53902EA"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "bedevelopvpcIGW1587A902"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.62.2"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.62.2"
+                }
+              },
+              "private-subnetSubnet1": {
+                "id": "private-subnetSubnet1",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "bedevelopvpc76CB6355"
+                        },
+                        "availabilityZone": "ap-south-1a",
+                        "cidrBlock": "10.0.3.0/24",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "private-subnet"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet1"
+                          },
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "bedevelopvpc76CB6355"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet1"
+                          },
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "bedevelopvpcprivatesubnetSubnet1RouteTable3E21EC9E"
+                        },
+                        "subnetId": {
+                          "Ref": "bedevelopvpcprivatesubnetSubnet1Subnet8ABCB171"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "bedevelopvpcprivatesubnetSubnet1RouteTable3E21EC9E"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "bedevelopvpcpublicsubnetSubnet1NATGateway7117929B"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.62.2"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.62.2"
+                }
+              },
+              "private-subnetSubnet2": {
+                "id": "private-subnetSubnet2",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "bedevelopvpc76CB6355"
+                        },
+                        "availabilityZone": "ap-south-1b",
+                        "cidrBlock": "10.0.4.0/24",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "private-subnet"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet2"
+                          },
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "bedevelopvpc76CB6355"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet2"
+                          },
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "bedevelopvpcprivatesubnetSubnet2RouteTable70DF4E55"
+                        },
+                        "subnetId": {
+                          "Ref": "bedevelopvpcprivatesubnetSubnet2Subnet662E9FA2"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "bedevelopvpcprivatesubnetSubnet2RouteTable70DF4E55"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "bedevelopvpcpublicsubnetSubnet1NATGateway7117929B"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.62.2"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.62.2"
+                }
+              },
+              "private-subnetSubnet3": {
+                "id": "private-subnetSubnet3",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet3",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet3/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "bedevelopvpc76CB6355"
+                        },
+                        "availabilityZone": "ap-south-1c",
+                        "cidrBlock": "10.0.5.0/24",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "private-subnet"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet3"
+                          },
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet3/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet3/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "bedevelopvpc76CB6355"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet3"
+                          },
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet3/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "bedevelopvpcprivatesubnetSubnet3RouteTable12A87883"
+                        },
+                        "subnetId": {
+                          "Ref": "bedevelopvpcprivatesubnetSubnet3Subnet8B52189C"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet3/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "bedevelopvpcprivatesubnetSubnet3RouteTable12A87883"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "bedevelopvpcpublicsubnetSubnet1NATGateway7117929B"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.62.2"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.62.2"
+                }
+              },
+              "IGW": {
+                "id": "IGW",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/IGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::InternetGateway",
+                  "aws:cdk:cloudformation:props": {
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "dev-web-app-BeNodeHapiPg/be-develop-vpc"
+                      },
+                      {
+                        "key": "sst:app",
+                        "value": "web-app"
+                      },
+                      {
+                        "key": "sst:stage",
+                        "value": "dev"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInternetGateway",
+                  "version": "2.62.2"
+                }
+              },
+              "VPCGW": {
+                "id": "VPCGW",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-vpc/VPCGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPCGatewayAttachment",
+                  "aws:cdk:cloudformation:props": {
+                    "vpcId": {
+                      "Ref": "bedevelopvpc76CB6355"
+                    },
+                    "internetGatewayId": {
+                      "Ref": "bedevelopvpcIGW1587A902"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPCGatewayAttachment",
+                  "version": "2.62.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.Vpc",
+              "version": "2.62.2"
+            }
+          },
+          "be-develop-elbSG": {
+            "id": "be-develop-elbSG",
+            "path": "dev-web-app-BeNodeHapiPg/be-develop-elbSG",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-elbSG/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "dev-web-app-BeNodeHapiPg/be-develop-elbSG",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "securityGroupIngress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "ipProtocol": "tcp",
+                        "fromPort": 80,
+                        "toPort": 80,
+                        "description": "Allow http traffic"
+                      }
+                    ],
+                    "tags": [
+                      {
+                        "key": "sst:app",
+                        "value": "web-app"
+                      },
+                      {
+                        "key": "sst:stage",
+                        "value": "dev"
+                      }
+                    ],
+                    "vpcId": {
+                      "Ref": "bedevelopvpc76CB6355"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.62.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.62.2"
+            }
+          },
+          "be-develop-ecsSG": {
+            "id": "be-develop-ecsSG",
+            "path": "dev-web-app-BeNodeHapiPg/be-develop-ecsSG",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-ecsSG/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "dev-web-app-BeNodeHapiPg/be-develop-ecsSG",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "tags": [
+                      {
+                        "key": "sst:app",
+                        "value": "web-app"
+                      },
+                      {
+                        "key": "sst:stage",
+                        "value": "dev"
+                      }
+                    ],
+                    "vpcId": {
+                      "Ref": "bedevelopvpc76CB6355"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.62.2"
+                }
+              },
+              "from devwebappBeNodeHapiPgbedevelopelbSGFB9CF208:ALL PORTS": {
+                "id": "from devwebappBeNodeHapiPgbedevelopelbSGFB9CF208:ALL PORTS",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-ecsSG/from devwebappBeNodeHapiPgbedevelopelbSGFB9CF208:ALL PORTS",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "ipProtocol": "tcp",
+                    "description": "Application load balancer",
+                    "fromPort": 0,
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "bedevelopecsSG5A7E0BD4",
+                        "GroupId"
+                      ]
+                    },
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "bedevelopelbSG8DDD5033",
+                        "GroupId"
+                      ]
+                    },
+                    "toPort": 65535
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.62.2"
+                }
+              },
+              "from devwebappBeNodeHapiPgbedevelopelbSecurityGroupB095B54C:9000": {
+                "id": "from devwebappBeNodeHapiPgbedevelopelbSecurityGroupB095B54C:9000",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-ecsSG/from devwebappBeNodeHapiPgbedevelopelbSecurityGroupB095B54C:9000",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "ipProtocol": "tcp",
+                    "description": "Load balancer to target",
+                    "fromPort": 9000,
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "bedevelopecsSG5A7E0BD4",
+                        "GroupId"
+                      ]
+                    },
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "bedevelopelbSecurityGroupCE812759",
+                        "GroupId"
+                      ]
+                    },
+                    "toPort": 9000
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.62.2"
+                }
+              },
+              "from devwebappBeNodeHapiPgbedevelopelbSGFB9CF208:9000": {
+                "id": "from devwebappBeNodeHapiPgbedevelopelbSGFB9CF208:9000",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-ecsSG/from devwebappBeNodeHapiPgbedevelopelbSGFB9CF208:9000",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "ipProtocol": "tcp",
+                    "description": "Load balancer to target",
+                    "fromPort": 9000,
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "bedevelopecsSG5A7E0BD4",
+                        "GroupId"
+                      ]
+                    },
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "bedevelopelbSG8DDD5033",
+                        "GroupId"
+                      ]
+                    },
+                    "toPort": 9000
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.62.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.62.2"
+            }
+          },
+          "be-develop-database-security-group": {
+            "id": "be-develop-database-security-group",
+            "path": "dev-web-app-BeNodeHapiPg/be-develop-database-security-group",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-database-security-group/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "dev-web-app-BeNodeHapiPg/be-develop-database-security-group",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "255.255.255.255/32",
+                        "description": "Disallow all traffic",
+                        "ipProtocol": "icmp",
+                        "fromPort": 252,
+                        "toPort": 86
+                      }
+                    ],
+                    "tags": [
+                      {
+                        "key": "sst:app",
+                        "value": "web-app"
+                      },
+                      {
+                        "key": "sst:stage",
+                        "value": "dev"
+                      }
+                    ],
+                    "vpcId": {
+                      "Ref": "bedevelopvpc76CB6355"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.62.2"
+                }
+              },
+              "from devwebappBeNodeHapiPgbedevelopecsSGF1065F9F:5432": {
+                "id": "from devwebappBeNodeHapiPgbedevelopecsSGF1065F9F:5432",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-database-security-group/from devwebappBeNodeHapiPgbedevelopecsSGF1065F9F:5432",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "ipProtocol": "tcp",
+                    "description": "Permit the database to accept requests from the fargate service",
+                    "fromPort": 5432,
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "bedevelopdatabasesecuritygroupED25631E",
+                        "GroupId"
+                      ]
+                    },
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "bedevelopecsSG5A7E0BD4",
+                        "GroupId"
+                      ]
+                    },
+                    "toPort": 5432
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.62.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.62.2"
+            }
+          },
+          "be-develop-database-credentials-secret": {
+            "id": "be-develop-database-credentials-secret",
+            "path": "dev-web-app-BeNodeHapiPg/be-develop-database-credentials-secret",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-database-credentials-secret/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::SecretsManager::Secret",
+                  "aws:cdk:cloudformation:props": {
+                    "description": "Database credentials for be-develop",
+                    "generateSecretString": {
+                      "excludeCharacters": "\"@/\\ '",
+                      "generateStringKey": "password",
+                      "passwordLength": 30,
+                      "secretStringTemplate": "{\"username\":\"username\"}"
+                    },
+                    "name": "be-develop-database-credentials",
+                    "tags": [
+                      {
+                        "key": "sst:app",
+                        "value": "web-app"
+                      },
+                      {
+                        "key": "sst:stage",
+                        "value": "dev"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_secretsmanager.CfnSecret",
+                  "version": "2.62.2"
+                }
+              },
+              "Attachment": {
+                "id": "Attachment",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-database-credentials-secret/Attachment",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-database-credentials-secret/Attachment/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::SecretsManager::SecretTargetAttachment",
+                      "aws:cdk:cloudformation:props": {
+                        "secretId": {
+                          "Ref": "bedevelopdatabasecredentialssecret19916F00"
+                        },
+                        "targetId": {
+                          "Ref": "bedevelopdatabaseinstance2E0D8132"
+                        },
+                        "targetType": "AWS::RDS::DBInstance"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_secretsmanager.CfnSecretTargetAttachment",
+                      "version": "2.62.2"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_secretsmanager.SecretTargetAttachment",
+                  "version": "2.62.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_secretsmanager.Secret",
+              "version": "2.62.2"
+            }
+          },
+          "be-develop-database-instance": {
+            "id": "be-develop-database-instance",
+            "path": "dev-web-app-BeNodeHapiPg/be-develop-database-instance",
+            "children": {
+              "SubnetGroup": {
+                "id": "SubnetGroup",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-database-instance/SubnetGroup",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-database-instance/SubnetGroup/Default",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::RDS::DBSubnetGroup",
+                      "aws:cdk:cloudformation:props": {
+                        "dbSubnetGroupDescription": "Subnet group for be-develop-database-instance database",
+                        "subnetIds": [
+                          {
+                            "Ref": "bedevelopvpcprivatesubnetSubnet1Subnet8ABCB171"
+                          },
+                          {
+                            "Ref": "bedevelopvpcprivatesubnetSubnet2Subnet662E9FA2"
+                          },
+                          {
+                            "Ref": "bedevelopvpcprivatesubnetSubnet3Subnet8B52189C"
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_rds.CfnDBSubnetGroup",
+                      "version": "2.62.2"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_rds.SubnetGroup",
+                  "version": "2.62.2"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-database-instance/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::RDS::DBInstance",
+                  "aws:cdk:cloudformation:props": {
+                    "allocatedStorage": "10",
+                    "backupRetentionPeriod": 1,
+                    "copyTagsToSnapshot": true,
+                    "dbInstanceClass": "db.t3.micro",
+                    "dbName": "be_database",
+                    "dbSubnetGroupName": {
+                      "Ref": "bedevelopdatabaseinstanceSubnetGroup53239A54"
+                    },
+                    "engine": "postgres",
+                    "engineVersion": "14.2",
+                    "masterUsername": "username",
+                    "masterUserPassword": {
+                      "Fn::Join": [
+                        "",
+                        [
+                          "{{resolve:secretsmanager:",
+                          {
+                            "Ref": "bedevelopdatabasecredentialssecret19916F00"
+                          },
+                          ":SecretString:password::}}"
+                        ]
+                      ]
+                    },
+                    "maxAllocatedStorage": 30,
+                    "publiclyAccessible": false,
+                    "storageType": "gp2",
+                    "tags": [
+                      {
+                        "key": "sst:app",
+                        "value": "web-app"
+                      },
+                      {
+                        "key": "sst:stage",
+                        "value": "dev"
+                      }
+                    ],
+                    "vpcSecurityGroups": [
+                      {
+                        "Fn::GetAtt": [
+                          "bedevelopdatabasesecuritygroupED25631E",
+                          "GroupId"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_rds.CfnDBInstance",
+                  "version": "2.62.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_rds.DatabaseInstance",
+              "version": "2.62.2"
+            }
+          },
+          "be-develop-redis-subnet-group": {
+            "id": "be-develop-redis-subnet-group",
+            "path": "dev-web-app-BeNodeHapiPg/be-develop-redis-subnet-group",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::ElastiCache::SubnetGroup",
+              "aws:cdk:cloudformation:props": {
+                "description": "Subnet group for the redis cluster",
+                "subnetIds": [
+                  {
+                    "Ref": "bedevelopvpcprivatesubnetSubnet1Subnet8ABCB171"
+                  },
+                  {
+                    "Ref": "bedevelopvpcprivatesubnetSubnet2Subnet662E9FA2"
+                  },
+                  {
+                    "Ref": "bedevelopvpcprivatesubnetSubnet3Subnet8B52189C"
+                  }
+                ],
+                "cacheSubnetGroupName": "be-develop-redis-subnet-group",
+                "tags": [
+                  {
+                    "key": "sst:app",
+                    "value": "web-app"
+                  },
+                  {
+                    "key": "sst:stage",
+                    "value": "dev"
+                  }
+                ]
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticache.CfnSubnetGroup",
+              "version": "2.62.2"
+            }
+          },
+          "be-develop-redis-security-group": {
+            "id": "be-develop-redis-security-group",
+            "path": "dev-web-app-BeNodeHapiPg/be-develop-redis-security-group",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-redis-security-group/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "Security group for the redis cluster",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "tags": [
+                      {
+                        "key": "sst:app",
+                        "value": "web-app"
+                      },
+                      {
+                        "key": "sst:stage",
+                        "value": "dev"
+                      }
+                    ],
+                    "vpcId": {
+                      "Ref": "bedevelopvpc76CB6355"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.62.2"
+                }
+              },
+              "from devwebappBeNodeHapiPgbedevelopecsSGF1065F9F:6379": {
+                "id": "from devwebappBeNodeHapiPgbedevelopecsSGF1065F9F:6379",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-redis-security-group/from devwebappBeNodeHapiPgbedevelopecsSGF1065F9F:6379",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "ipProtocol": "tcp",
+                    "description": "Permit the redis cluster to accept requests from the fargate service",
+                    "fromPort": 6379,
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "bedevelopredissecuritygroup258843E4",
+                        "GroupId"
+                      ]
+                    },
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "bedevelopecsSG5A7E0BD4",
+                        "GroupId"
+                      ]
+                    },
+                    "toPort": 6379
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.62.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.62.2"
+            }
+          },
+          "be-develop-redis-cache": {
+            "id": "be-develop-redis-cache",
+            "path": "dev-web-app-BeNodeHapiPg/be-develop-redis-cache",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::ElastiCache::CacheCluster",
+              "aws:cdk:cloudformation:props": {
+                "cacheNodeType": "cache.t3.micro",
+                "engine": "redis",
+                "numCacheNodes": 1,
+                "cacheSubnetGroupName": {
+                  "Ref": "bedevelopredissubnetgroup"
+                },
+                "clusterName": "be-develop-redis-cluster",
+                "engineVersion": "6.2",
+                "tags": [
+                  {
+                    "key": "sst:app",
+                    "value": "web-app"
+                  },
+                  {
+                    "key": "sst:stage",
+                    "value": "dev"
+                  }
+                ],
+                "vpcSecurityGroupIds": [
+                  {
+                    "Fn::GetAtt": [
+                      "bedevelopredissecuritygroup258843E4",
+                      "GroupId"
+                    ]
+                  }
+                ]
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticache.CfnCacheCluster",
+              "version": "2.62.2"
+            }
+          },
+          "be-develop-cluster": {
+            "id": "be-develop-cluster",
+            "path": "dev-web-app-BeNodeHapiPg/be-develop-cluster",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-cluster/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ECS::Cluster",
+                  "aws:cdk:cloudformation:props": {
+                    "clusterName": "be-develop-cluster",
+                    "tags": [
+                      {
+                        "key": "sst:app",
+                        "value": "web-app"
+                      },
+                      {
+                        "key": "sst:stage",
+                        "value": "dev"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ecs.CfnCluster",
+                  "version": "2.62.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ecs.Cluster",
+              "version": "2.62.2"
+            }
+          },
+          "be-develop-elb": {
+            "id": "be-develop-elb",
+            "path": "dev-web-app-BeNodeHapiPg/be-develop-elb",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-elb/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+                  "aws:cdk:cloudformation:props": {
+                    "loadBalancerAttributes": [
+                      {
+                        "key": "deletion_protection.enabled",
+                        "value": "false"
+                      }
+                    ],
+                    "name": "be-develop-alb",
+                    "scheme": "internet-facing",
+                    "securityGroups": [
+                      {
+                        "Fn::GetAtt": [
+                          "bedevelopelbSecurityGroupCE812759",
+                          "GroupId"
+                        ]
+                      },
+                      {
+                        "Fn::GetAtt": [
+                          "bedevelopelbSG8DDD5033",
+                          "GroupId"
+                        ]
+                      }
+                    ],
+                    "subnets": [
+                      {
+                        "Ref": "bedevelopvpcpublicsubnetSubnet1SubnetB0121C69"
+                      },
+                      {
+                        "Ref": "bedevelopvpcpublicsubnetSubnet2Subnet07F44778"
+                      },
+                      {
+                        "Ref": "bedevelopvpcpublicsubnetSubnet3SubnetFB4EA845"
+                      }
+                    ],
+                    "tags": [
+                      {
+                        "key": "sst:app",
+                        "value": "web-app"
+                      },
+                      {
+                        "key": "sst:stage",
+                        "value": "dev"
+                      }
+                    ],
+                    "type": "application"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnLoadBalancer",
+                  "version": "2.62.2"
+                }
+              },
+              "SecurityGroup": {
+                "id": "SecurityGroup",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-elb/SecurityGroup",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-elb/SecurityGroup/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                      "aws:cdk:cloudformation:props": {
+                        "groupDescription": "Automatically created Security Group for ELB devwebappBeNodeHapiPgbedevelopelb9497A74E",
+                        "securityGroupIngress": [
+                          {
+                            "cidrIp": "0.0.0.0/0",
+                            "ipProtocol": "tcp",
+                            "fromPort": 80,
+                            "toPort": 80,
+                            "description": "Allow from anyone on port 80"
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ],
+                        "vpcId": {
+                          "Ref": "bedevelopvpc76CB6355"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "to devwebappBeNodeHapiPgbedevelopecsSGF1065F9F:9000": {
+                    "id": "to devwebappBeNodeHapiPgbedevelopecsSGF1065F9F:9000",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-elb/SecurityGroup/to devwebappBeNodeHapiPgbedevelopecsSGF1065F9F:9000",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupEgress",
+                      "aws:cdk:cloudformation:props": {
+                        "groupId": {
+                          "Fn::GetAtt": [
+                            "bedevelopelbSecurityGroupCE812759",
+                            "GroupId"
+                          ]
+                        },
+                        "ipProtocol": "tcp",
+                        "description": "Load balancer to target",
+                        "destinationSecurityGroupId": {
+                          "Fn::GetAtt": [
+                            "bedevelopecsSG5A7E0BD4",
+                            "GroupId"
+                          ]
+                        },
+                        "fromPort": 9000,
+                        "toPort": 9000
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupEgress",
+                      "version": "2.62.2"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+                  "version": "2.62.2"
+                }
+              },
+              "Listener": {
+                "id": "Listener",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-elb/Listener",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-elb/Listener/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::Listener",
+                      "aws:cdk:cloudformation:props": {
+                        "defaultActions": [
+                          {
+                            "type": "forward",
+                            "targetGroupArn": {
+                              "Ref": "bedeveloptarget26CAD283"
+                            }
+                          }
+                        ],
+                        "loadBalancerArn": {
+                          "Ref": "bedevelopelb3DD0D824"
+                        },
+                        "port": 80,
+                        "protocol": "HTTP"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnListener",
+                      "version": "2.62.2"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationListener",
+                  "version": "2.62.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationLoadBalancer",
+              "version": "2.62.2"
+            }
+          },
+          "be-develop-target": {
+            "id": "be-develop-target",
+            "path": "dev-web-app-BeNodeHapiPg/be-develop-target",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-target/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "healthCheckPath": "/",
+                    "healthCheckProtocol": "HTTP",
+                    "port": 80,
+                    "protocol": "HTTP",
+                    "tags": [
+                      {
+                        "key": "sst:app",
+                        "value": "web-app"
+                      },
+                      {
+                        "key": "sst:stage",
+                        "value": "dev"
+                      }
+                    ],
+                    "targetGroupAttributes": [
+                      {
+                        "key": "stickiness.enabled",
+                        "value": "false"
+                      }
+                    ],
+                    "targetType": "ip",
+                    "vpcId": {
+                      "Ref": "bedevelopvpc76CB6355"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.CfnTargetGroup",
+                  "version": "2.62.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationTargetGroup",
+              "version": "2.62.2"
+            }
+          },
+          "be-develop-task-role": {
+            "id": "be-develop-task-role",
+            "path": "dev-web-app-BeNodeHapiPg/be-develop-task-role",
+            "children": {
+              "Importbe-develop-task-role": {
+                "id": "Importbe-develop-task-role",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-task-role/Importbe-develop-task-role",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.62.2"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-task-role/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "ecs-tasks.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "description": "Role that the api task definitions use to run the api code",
+                    "roleName": "be-develop-task-role",
+                    "tags": [
+                      {
+                        "key": "sst:app",
+                        "value": "web-app"
+                      },
+                      {
+                        "key": "sst:stage",
+                        "value": "dev"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                  "version": "2.62.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.Role",
+              "version": "2.62.2"
+            }
+          },
+          "be-develop-task": {
+            "id": "be-develop-task",
+            "path": "dev-web-app-BeNodeHapiPg/be-develop-task",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-task/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ECS::TaskDefinition",
+                  "aws:cdk:cloudformation:props": {
+                    "containerDefinitions": [
+                      {
+                        "essential": true,
+                        "image": {
+                          "Fn::Sub": "511522223657.dkr.ecr.ap-south-1.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-511522223657-ap-south-1:920c87ba3f7f501472b9ed4f4ab82cea80bd0168bf7f61a2f617601ef6fa5719"
+                        },
+                        "memory": 512,
+                        "name": "be-develop-container",
+                        "portMappings": [
+                          {
+                            "containerPort": 9000,
+                            "protocol": "tcp"
+                          }
+                        ],
+                        "logConfiguration": {
+                          "logDriver": "awslogs",
+                          "options": {
+                            "awslogs-group": {
+                              "Ref": "bedeveloptaskbedevelopcontainerLogGroup53CC6C01"
+                            },
+                            "awslogs-stream-prefix": "be-develop-log-group",
+                            "awslogs-region": "ap-south-1"
+                          }
+                        },
+                        "environment": [
+                          {
+                            "name": "BUILD_NAME",
+                            "value": "develop"
+                          },
+                          {
+                            "name": "ENVIRONMENT_NAME",
+                            "value": "development"
+                          },
+                          {
+                            "name": "DB_URI",
+                            "value": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "postgres://{{resolve:secretsmanager:",
+                                  {
+                                    "Ref": "bedevelopdatabasecredentialssecret19916F00"
+                                  },
+                                  ":SecretString:username::}}:{{resolve:secretsmanager:",
+                                  {
+                                    "Ref": "bedevelopdatabasecredentialssecret19916F00"
+                                  },
+                                  ":SecretString:password::}}@",
+                                  {
+                                    "Fn::GetAtt": [
+                                      "bedevelopdatabaseinstance2E0D8132",
+                                      "Endpoint.Address"
+                                    ]
+                                  },
+                                  "/be_database"
+                                ]
+                              ]
+                            }
+                          },
+                          {
+                            "name": "POSTGRES_HOST",
+                            "value": {
+                              "Fn::GetAtt": [
+                                "bedevelopdatabaseinstance2E0D8132",
+                                "Endpoint.Address"
+                              ]
+                            }
+                          },
+                          {
+                            "name": "REDIS_HOST",
+                            "value": {
+                              "Fn::GetAtt": [
+                                "bedeveloprediscache",
+                                "RedisEndpoint.Address"
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "cpu": "256",
+                    "executionRoleArn": {
+                      "Fn::GetAtt": [
+                        "bedeveloptaskExecutionRole5F605120",
+                        "Arn"
+                      ]
+                    },
+                    "family": "be-develop-task",
+                    "memory": "512",
+                    "networkMode": "awsvpc",
+                    "requiresCompatibilities": [
+                      "EC2",
+                      "FARGATE"
+                    ],
+                    "tags": [
+                      {
+                        "key": "sst:app",
+                        "value": "web-app"
+                      },
+                      {
+                        "key": "sst:stage",
+                        "value": "dev"
+                      }
+                    ],
+                    "taskRoleArn": {
+                      "Fn::GetAtt": [
+                        "bedeveloptaskrole7E2F6F60",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ecs.CfnTaskDefinition",
+                  "version": "2.62.2"
+                }
+              },
+              "be-develop-container": {
+                "id": "be-develop-container",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-task/be-develop-container",
+                "children": {
+                  "AssetImage": {
+                    "id": "AssetImage",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-task/be-develop-container/AssetImage",
+                    "children": {
+                      "Staging": {
+                        "id": "Staging",
+                        "path": "dev-web-app-BeNodeHapiPg/be-develop-task/be-develop-container/AssetImage/Staging",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.AssetStaging",
+                          "version": "2.62.2"
+                        }
+                      },
+                      "Repository": {
+                        "id": "Repository",
+                        "path": "dev-web-app-BeNodeHapiPg/be-develop-task/be-develop-container/AssetImage/Repository",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_ecr.RepositoryBase",
+                          "version": "2.62.2"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ecr_assets.DockerImageAsset",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "LogGroup": {
+                    "id": "LogGroup",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-task/be-develop-container/LogGroup",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "dev-web-app-BeNodeHapiPg/be-develop-task/be-develop-container/LogGroup/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::Logs::LogGroup",
+                          "aws:cdk:cloudformation:props": {
+                            "tags": [
+                              {
+                                "key": "sst:app",
+                                "value": "web-app"
+                              },
+                              {
+                                "key": "sst:stage",
+                                "value": "dev"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_logs.CfnLogGroup",
+                          "version": "2.62.2"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_logs.LogGroup",
+                      "version": "2.62.2"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ecs.ContainerDefinition",
+                  "version": "2.62.2"
+                }
+              },
+              "ExecutionRole": {
+                "id": "ExecutionRole",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-task/ExecutionRole",
+                "children": {
+                  "ImportExecutionRole": {
+                    "id": "ImportExecutionRole",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-task/ExecutionRole/ImportExecutionRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-task/ExecutionRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "ecs-tasks.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "tags": [
+                          {
+                            "key": "sst:app",
+                            "value": "web-app"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "dev"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.62.2"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "dev-web-app-BeNodeHapiPg/be-develop-task/ExecutionRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "dev-web-app-BeNodeHapiPg/be-develop-task/ExecutionRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "ecr:BatchCheckLayerAvailability",
+                                    "ecr:GetDownloadUrlForLayer",
+                                    "ecr:BatchGetImage"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":ecr:ap-south-1:511522223657:repository/cdk-hnb659fds-container-assets-511522223657-ap-south-1"
+                                      ]
+                                    ]
+                                  }
+                                },
+                                {
+                                  "Action": "ecr:GetAuthorizationToken",
+                                  "Effect": "Allow",
+                                  "Resource": "*"
+                                },
+                                {
+                                  "Action": [
+                                    "logs:CreateLogStream",
+                                    "logs:PutLogEvents"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": {
+                                    "Fn::GetAtt": [
+                                      "bedeveloptaskbedevelopcontainerLogGroup53CC6C01",
+                                      "Arn"
+                                    ]
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "bedeveloptaskExecutionRoleDefaultPolicyD3F3FB6B",
+                            "roles": [
+                              {
+                                "Ref": "bedeveloptaskExecutionRole5F605120"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.62.2"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.62.2"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.62.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ecs.TaskDefinition",
+              "version": "2.62.2"
+            }
+          },
+          "be-develop-service": {
+            "id": "be-develop-service",
+            "path": "dev-web-app-BeNodeHapiPg/be-develop-service",
+            "children": {
+              "Service": {
+                "id": "Service",
+                "path": "dev-web-app-BeNodeHapiPg/be-develop-service/Service",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ECS::Service",
+                  "aws:cdk:cloudformation:props": {
+                    "cluster": {
+                      "Ref": "bedevelopcluster1CBCC87F"
+                    },
+                    "deploymentConfiguration": {
+                      "maximumPercent": 200,
+                      "minimumHealthyPercent": 50
+                    },
+                    "desiredCount": 1,
+                    "enableEcsManagedTags": false,
+                    "healthCheckGracePeriodSeconds": 60,
+                    "launchType": "FARGATE",
+                    "loadBalancers": [
+                      {
+                        "targetGroupArn": {
+                          "Ref": "bedeveloptarget26CAD283"
+                        },
+                        "containerName": "be-develop-container",
+                        "containerPort": 9000
+                      }
+                    ],
+                    "networkConfiguration": {
+                      "awsvpcConfiguration": {
+                        "assignPublicIp": "ENABLED",
+                        "subnets": [
+                          {
+                            "Ref": "bedevelopvpcpublicsubnetSubnet1SubnetB0121C69"
+                          },
+                          {
+                            "Ref": "bedevelopvpcpublicsubnetSubnet2Subnet07F44778"
+                          },
+                          {
+                            "Ref": "bedevelopvpcpublicsubnetSubnet3SubnetFB4EA845"
+                          }
+                        ],
+                        "securityGroups": [
+                          {
+                            "Fn::GetAtt": [
+                              "bedevelopecsSG5A7E0BD4",
+                              "GroupId"
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "tags": [
+                      {
+                        "key": "sst:app",
+                        "value": "web-app"
+                      },
+                      {
+                        "key": "sst:stage",
+                        "value": "dev"
+                      }
+                    ],
+                    "taskDefinition": {
+                      "Ref": "bedeveloptask5D6B8D85"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ecs.CfnService",
+                  "version": "2.62.2"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ecs.FargateService",
+              "version": "2.62.2"
+            }
+          },
+          "database-host": {
+            "id": "database-host",
+            "path": "dev-web-app-BeNodeHapiPg/database-host",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.62.2"
+            }
+          },
+          "database-name": {
+            "id": "database-name",
+            "path": "dev-web-app-BeNodeHapiPg/database-name",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.62.2"
+            }
+          },
+          "redis-host": {
+            "id": "redis-host",
+            "path": "dev-web-app-BeNodeHapiPg/redis-host",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.62.2"
+            }
+          },
+          "load-balancer-dns": {
+            "id": "load-balancer-dns",
+            "path": "dev-web-app-BeNodeHapiPg/load-balancer-dns",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.62.2"
+            }
+          },
+          "aws-region": {
+            "id": "aws-region",
+            "path": "dev-web-app-BeNodeHapiPg/aws-region",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.62.2"
+            }
+          },
+          "elastic-container-registry-repo": {
+            "id": "elastic-container-registry-repo",
+            "path": "dev-web-app-BeNodeHapiPg/elastic-container-registry-repo",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.62.2"
+            }
+          },
+          "image": {
+            "id": "image",
+            "path": "dev-web-app-BeNodeHapiPg/image",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.62.2"
+            }
+          },
+          "task-definition-arn": {
+            "id": "task-definition-arn",
+            "path": "dev-web-app-BeNodeHapiPg/task-definition-arn",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.62.2"
+            }
+          },
+          "task-role": {
+            "id": "task-role",
+            "path": "dev-web-app-BeNodeHapiPg/task-role",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.62.2"
+            }
+          },
+          "execution-role": {
+            "id": "execution-role",
+            "path": "dev-web-app-BeNodeHapiPg/execution-role",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.62.2"
+            }
+          },
+          "family": {
+            "id": "family",
+            "path": "dev-web-app-BeNodeHapiPg/family",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.62.2"
+            }
+          },
+          "container-name": {
+            "id": "container-name",
+            "path": "dev-web-app-BeNodeHapiPg/container-name",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.62.2"
+            }
+          },
+          "container-port": {
+            "id": "container-port",
+            "path": "dev-web-app-BeNodeHapiPg/container-port",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.62.2"
+            }
+          },
+          "log-driver": {
+            "id": "log-driver",
+            "path": "dev-web-app-BeNodeHapiPg/log-driver",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.62.2"
+            }
+          },
+          "log-driver-options": {
+            "id": "log-driver-options",
+            "path": "dev-web-app-BeNodeHapiPg/log-driver-options",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.62.2"
+            }
+          },
+          "SSTStackOutputSSTMetadata": {
+            "id": "SSTStackOutputSSTMetadata",
+            "path": "dev-web-app-BeNodeHapiPg/SSTStackOutputSSTMetadata",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.72.1"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "dev-web-app-BeNodeHapiPg/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.72.1"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "dev-web-app-BeNodeHapiPg/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.72.1"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.72.1"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.1.156"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.72.1"
+    }
+  }
+}

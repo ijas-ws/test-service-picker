@@ -1,0 +1,737 @@
+{
+  "version": "31.0.0",
+  "artifacts": {
+    "dev-web-app-FeNextJsWeb.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "dev-web-app-FeNextJsWeb.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "dev-web-app-FeNextJsWeb": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://511522223657/ap-south-1",
+      "properties": {
+        "templateFile": "dev-web-app-FeNextJsWeb.template.json",
+        "tags": {
+          "sst:app": "web-app",
+          "sst:stage": "dev"
+        },
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::511522223657:role/cdk-hnb659fds-deploy-role-511522223657-ap-south-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::511522223657:role/cdk-hnb659fds-cfn-exec-role-511522223657-ap-south-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-511522223657-ap-south-1/ea3bd38981ba9ea38141eb09ab1a4a192d3f8c99acdba2432fa745db5fbe6e8e.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "dev-web-app-FeNextJsWeb.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::511522223657:role/cdk-hnb659fds-lookup-role-511522223657-ap-south-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "dev-web-app-FeNextJsWeb.assets"
+      ],
+      "metadata": {
+        "/dev-web-app-FeNextJsWeb": [
+          {
+            "type": "aws:cdk:stack-tags",
+            "data": [
+              {
+                "Key": "sst:app",
+                "Value": "web-app"
+              },
+              {
+                "Key": "sst:stage",
+                "Value": "dev"
+              }
+            ]
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/CustomResourceHandler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomResourceHandlerServiceRole41AEC181"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/CustomResourceHandler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomResourceHandlerE8FB56BA"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/FeNextJsWebSite/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FeNextJsWebSiteAwsCliLayerF5B94C8C"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Bucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FeNextJsWebSiteS3BucketDD4A31F5"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Bucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FeNextJsWebSiteS3BucketPolicy8E3EFE4D"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Bucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FeNextJsWebSiteS3BucketAutoDeleteObjectsCustomResource3BD4097C"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Uploader/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FeNextJsWebSiteS3UploaderServiceRole5575E6B0"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Uploader/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FeNextJsWebSiteS3UploaderServiceRoleDefaultPolicy1F6F01C3"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Uploader/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FeNextJsWebSiteS3Uploader7A776442"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Handler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FeNextJsWebSiteS3HandlerServiceRole8612F454"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Handler/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FeNextJsWebSiteS3HandlerServiceRoleDefaultPolicyCEE706C8"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Handler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FeNextJsWebSiteS3HandlerED313E21"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/FeNextJsWebSite/S3Deployment/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FeNextJsWebSiteS3DeploymentF87F5D3D"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/FeNextJsWebSite/CloudFrontFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FeNextJsWebSiteCloudFrontFunctionB44F3D97"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/FeNextJsWebSite/Distribution/Origin1/S3Origin/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FeNextJsWebSiteDistributionOrigin1S3Origin5A251E8C"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/FeNextJsWebSite/Distribution/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FeNextJsWebSiteDistributionA2A9018B"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/FeNextJsWebSite/CloudFrontInvalidatorPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FeNextJsWebSiteCloudFrontInvalidatorPolicy1CA924F1"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/FeNextJsWebSite/CloudFrontInvalidator/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FeNextJsWebSiteCloudFrontInvalidator5DB04321"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/FeNextJsWebSite/Parameter_url/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FeNextJsWebSiteParameterurlB7C889FC"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/SSTStackOutputSiteUrl": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SiteUrl"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/SSTStackOutputdistributionId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "distributionId"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/SSTStackOutputbucketName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bucketName"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/SSTStackOutputSSTMetadata": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SSTMetadata"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/dev-web-app-FeNextJsWeb/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "dev-web-app-FeNextJsWeb"
+    },
+    "dev-web-app-BeNodeHapiPg.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "dev-web-app-BeNodeHapiPg.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "dev-web-app-BeNodeHapiPg": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://511522223657/ap-south-1",
+      "properties": {
+        "templateFile": "dev-web-app-BeNodeHapiPg.template.json",
+        "tags": {
+          "sst:app": "web-app",
+          "sst:stage": "dev"
+        },
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::511522223657:role/cdk-hnb659fds-deploy-role-511522223657-ap-south-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::511522223657:role/cdk-hnb659fds-cfn-exec-role-511522223657-ap-south-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-511522223657-ap-south-1/5c49b5da34f6391c8050ad2b2873bbcae485375c391d098d118ca0d857056ef7.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "dev-web-app-BeNodeHapiPg.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::511522223657:role/cdk-hnb659fds-lookup-role-511522223657-ap-south-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "dev-web-app-BeNodeHapiPg.assets"
+      ],
+      "metadata": {
+        "/dev-web-app-BeNodeHapiPg": [
+          {
+            "type": "aws:cdk:stack-tags",
+            "data": [
+              {
+                "Key": "sst:app",
+                "Value": "web-app"
+              },
+              {
+                "Key": "sst:stage",
+                "Value": "dev"
+              }
+            ]
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/CustomResourceHandler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomResourceHandlerServiceRole41AEC181"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/CustomResourceHandler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomResourceHandlerE8FB56BA"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpc76CB6355"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcpublicsubnetSubnet1SubnetB0121C69"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcpublicsubnetSubnet1RouteTableE1044599"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcpublicsubnetSubnet1RouteTableAssociation42B5F6CB"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcpublicsubnetSubnet1DefaultRoute0D7E48EA"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcpublicsubnetSubnet1EIP1377ABBB"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcpublicsubnetSubnet1NATGateway7117929B"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcpublicsubnetSubnet2Subnet07F44778"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcpublicsubnetSubnet2RouteTable2DBEABCE"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcpublicsubnetSubnet2RouteTableAssociationD80586B2"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcpublicsubnetSubnet2DefaultRouteCFE9107F"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet3/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcpublicsubnetSubnet3SubnetFB4EA845"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet3/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcpublicsubnetSubnet3RouteTableC53902EA"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet3/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcpublicsubnetSubnet3RouteTableAssociation389B2C8D"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet3/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcpublicsubnetSubnet3DefaultRouteD8B98C36"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcprivatesubnetSubnet1Subnet8ABCB171"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcprivatesubnetSubnet1RouteTable3E21EC9E"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcprivatesubnetSubnet1RouteTableAssociationAB4C72A7"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcprivatesubnetSubnet1DefaultRouteD72FB7EA"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcprivatesubnetSubnet2Subnet662E9FA2"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcprivatesubnetSubnet2RouteTable70DF4E55"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcprivatesubnetSubnet2RouteTableAssociation5F7193DE"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcprivatesubnetSubnet2DefaultRouteA8CDE0D5"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet3/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcprivatesubnetSubnet3Subnet8B52189C"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet3/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcprivatesubnetSubnet3RouteTable12A87883"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet3/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcprivatesubnetSubnet3RouteTableAssociationDD440985"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet3/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcprivatesubnetSubnet3DefaultRouteC0D97DDF"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcIGW1587A902"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-vpc/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopvpcVPCGW921C4F66"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-elbSG/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopelbSG8DDD5033"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-ecsSG/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopecsSG5A7E0BD4"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-ecsSG/from devwebappBeNodeHapiPgbedevelopelbSGFB9CF208:ALL PORTS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopecsSGfromdevwebappBeNodeHapiPgbedevelopelbSGFB9CF208ALLPORTS6437ACA1"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-ecsSG/from devwebappBeNodeHapiPgbedevelopelbSecurityGroupB095B54C:9000": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopecsSGfromdevwebappBeNodeHapiPgbedevelopelbSecurityGroupB095B54C9000727DBC58"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-ecsSG/from devwebappBeNodeHapiPgbedevelopelbSGFB9CF208:9000": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopecsSGfromdevwebappBeNodeHapiPgbedevelopelbSGFB9CF2089000E3357063"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-database-security-group/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopdatabasesecuritygroupED25631E"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-database-security-group/from devwebappBeNodeHapiPgbedevelopecsSGF1065F9F:5432": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopdatabasesecuritygroupfromdevwebappBeNodeHapiPgbedevelopecsSGF1065F9F54326FF3BC99"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-database-credentials-secret/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopdatabasecredentialssecret19916F00"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-database-credentials-secret/Attachment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopdatabasecredentialssecretAttachment43AFFA8B"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-database-instance/SubnetGroup/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopdatabaseinstanceSubnetGroup53239A54"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-database-instance/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopdatabaseinstance2E0D8132"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-redis-subnet-group": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopredissubnetgroup"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-redis-security-group/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopredissecuritygroup258843E4"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-redis-security-group/from devwebappBeNodeHapiPgbedevelopecsSGF1065F9F:6379": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopredissecuritygroupfromdevwebappBeNodeHapiPgbedevelopecsSGF1065F9F6379D4EC40A7"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-redis-cache": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedeveloprediscache"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-cluster/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopcluster1CBCC87F"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-elb/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopelb3DD0D824"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-elb/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopelbSecurityGroupCE812759"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-elb/SecurityGroup/to devwebappBeNodeHapiPgbedevelopecsSGF1065F9F:9000": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopelbSecurityGrouptodevwebappBeNodeHapiPgbedevelopecsSGF1065F9F90002EDAA08C"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-elb/Listener/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopelbListenerD47D2F61"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedeveloptarget26CAD283"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-task-role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedeveloptaskrole7E2F6F60"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-task/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedeveloptask5D6B8D85"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-task/be-develop-container/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedeveloptaskbedevelopcontainerLogGroup53CC6C01"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-task/ExecutionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedeveloptaskExecutionRole5F605120"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-task/ExecutionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedeveloptaskExecutionRoleDefaultPolicyD3F3FB6B"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/be-develop-service/Service": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bedevelopserviceService1EE878D4"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/database-host": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "databasehost"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/database-name": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "databasename"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/redis-host": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "redishost"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/load-balancer-dns": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "loadbalancerdns"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/aws-region": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsregion"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/elastic-container-registry-repo": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "elasticcontainerregistryrepo"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/image": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "image"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/task-definition-arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "taskdefinitionarn"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/task-role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "taskrole"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/execution-role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "executionrole"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/family": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "family"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/container-name": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "containername"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/container-port": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "containerport"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/log-driver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "logdriver"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/log-driver-options": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "logdriveroptions"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/SSTStackOutputSSTMetadata": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SSTMetadata"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/dev-web-app-BeNodeHapiPg/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "dev-web-app-BeNodeHapiPg"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

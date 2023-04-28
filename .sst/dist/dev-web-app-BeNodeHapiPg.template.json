@@ -1,0 +1,1701 @@
+{
+ "Resources": {
+  "CustomResourceHandlerServiceRole41AEC181": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "CustomResourceHandlerE8FB56BA": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-511522223657-ap-south-1",
+     "S3Key": "4ed08e2ef7e90b87425eb697b20beb1d32e59b875b2fb53103465ca3b6aa94c9.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomResourceHandlerServiceRole41AEC181",
+      "Arn"
+     ]
+    },
+    "Handler": "index.handler",
+    "MemorySize": 1024,
+    "Runtime": "nodejs16.x",
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "Timeout": 900
+   },
+   "DependsOn": [
+    "CustomResourceHandlerServiceRole41AEC181"
+   ]
+  },
+  "bedevelopvpc76CB6355": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BeNodeHapiPg/be-develop-vpc"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "bedevelopvpcpublicsubnetSubnet1SubnetB0121C69": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "bedevelopvpc76CB6355"
+    },
+    "AvailabilityZone": "ap-south-1a",
+    "CidrBlock": "10.0.0.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "public-subnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "bedevelopvpcpublicsubnetSubnet1RouteTableE1044599": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "bedevelopvpc76CB6355"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "bedevelopvpcpublicsubnetSubnet1RouteTableAssociation42B5F6CB": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "bedevelopvpcpublicsubnetSubnet1RouteTableE1044599"
+    },
+    "SubnetId": {
+     "Ref": "bedevelopvpcpublicsubnetSubnet1SubnetB0121C69"
+    }
+   }
+  },
+  "bedevelopvpcpublicsubnetSubnet1DefaultRoute0D7E48EA": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "bedevelopvpcpublicsubnetSubnet1RouteTableE1044599"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "bedevelopvpcIGW1587A902"
+    }
+   },
+   "DependsOn": [
+    "bedevelopvpcVPCGW921C4F66"
+   ]
+  },
+  "bedevelopvpcpublicsubnetSubnet1EIP1377ABBB": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "bedevelopvpcpublicsubnetSubnet1NATGateway7117929B": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "bedevelopvpcpublicsubnetSubnet1SubnetB0121C69"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "bedevelopvpcpublicsubnetSubnet1EIP1377ABBB",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet1"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   },
+   "DependsOn": [
+    "bedevelopvpcpublicsubnetSubnet1DefaultRoute0D7E48EA",
+    "bedevelopvpcpublicsubnetSubnet1RouteTableAssociation42B5F6CB"
+   ]
+  },
+  "bedevelopvpcpublicsubnetSubnet2Subnet07F44778": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "bedevelopvpc76CB6355"
+    },
+    "AvailabilityZone": "ap-south-1b",
+    "CidrBlock": "10.0.1.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "public-subnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet2"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "bedevelopvpcpublicsubnetSubnet2RouteTable2DBEABCE": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "bedevelopvpc76CB6355"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet2"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "bedevelopvpcpublicsubnetSubnet2RouteTableAssociationD80586B2": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "bedevelopvpcpublicsubnetSubnet2RouteTable2DBEABCE"
+    },
+    "SubnetId": {
+     "Ref": "bedevelopvpcpublicsubnetSubnet2Subnet07F44778"
+    }
+   }
+  },
+  "bedevelopvpcpublicsubnetSubnet2DefaultRouteCFE9107F": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "bedevelopvpcpublicsubnetSubnet2RouteTable2DBEABCE"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "bedevelopvpcIGW1587A902"
+    }
+   },
+   "DependsOn": [
+    "bedevelopvpcVPCGW921C4F66"
+   ]
+  },
+  "bedevelopvpcpublicsubnetSubnet3SubnetFB4EA845": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "bedevelopvpc76CB6355"
+    },
+    "AvailabilityZone": "ap-south-1c",
+    "CidrBlock": "10.0.2.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "public-subnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet3"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "bedevelopvpcpublicsubnetSubnet3RouteTableC53902EA": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "bedevelopvpc76CB6355"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/public-subnetSubnet3"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "bedevelopvpcpublicsubnetSubnet3RouteTableAssociation389B2C8D": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "bedevelopvpcpublicsubnetSubnet3RouteTableC53902EA"
+    },
+    "SubnetId": {
+     "Ref": "bedevelopvpcpublicsubnetSubnet3SubnetFB4EA845"
+    }
+   }
+  },
+  "bedevelopvpcpublicsubnetSubnet3DefaultRouteD8B98C36": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "bedevelopvpcpublicsubnetSubnet3RouteTableC53902EA"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "bedevelopvpcIGW1587A902"
+    }
+   },
+   "DependsOn": [
+    "bedevelopvpcVPCGW921C4F66"
+   ]
+  },
+  "bedevelopvpcprivatesubnetSubnet1Subnet8ABCB171": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "bedevelopvpc76CB6355"
+    },
+    "AvailabilityZone": "ap-south-1a",
+    "CidrBlock": "10.0.3.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "private-subnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet1"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "bedevelopvpcprivatesubnetSubnet1RouteTable3E21EC9E": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "bedevelopvpc76CB6355"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet1"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "bedevelopvpcprivatesubnetSubnet1RouteTableAssociationAB4C72A7": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "bedevelopvpcprivatesubnetSubnet1RouteTable3E21EC9E"
+    },
+    "SubnetId": {
+     "Ref": "bedevelopvpcprivatesubnetSubnet1Subnet8ABCB171"
+    }
+   }
+  },
+  "bedevelopvpcprivatesubnetSubnet1DefaultRouteD72FB7EA": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "bedevelopvpcprivatesubnetSubnet1RouteTable3E21EC9E"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "bedevelopvpcpublicsubnetSubnet1NATGateway7117929B"
+    }
+   }
+  },
+  "bedevelopvpcprivatesubnetSubnet2Subnet662E9FA2": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "bedevelopvpc76CB6355"
+    },
+    "AvailabilityZone": "ap-south-1b",
+    "CidrBlock": "10.0.4.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "private-subnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet2"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "bedevelopvpcprivatesubnetSubnet2RouteTable70DF4E55": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "bedevelopvpc76CB6355"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet2"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "bedevelopvpcprivatesubnetSubnet2RouteTableAssociation5F7193DE": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "bedevelopvpcprivatesubnetSubnet2RouteTable70DF4E55"
+    },
+    "SubnetId": {
+     "Ref": "bedevelopvpcprivatesubnetSubnet2Subnet662E9FA2"
+    }
+   }
+  },
+  "bedevelopvpcprivatesubnetSubnet2DefaultRouteA8CDE0D5": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "bedevelopvpcprivatesubnetSubnet2RouteTable70DF4E55"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "bedevelopvpcpublicsubnetSubnet1NATGateway7117929B"
+    }
+   }
+  },
+  "bedevelopvpcprivatesubnetSubnet3Subnet8B52189C": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "bedevelopvpc76CB6355"
+    },
+    "AvailabilityZone": "ap-south-1c",
+    "CidrBlock": "10.0.5.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "private-subnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet3"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "bedevelopvpcprivatesubnetSubnet3RouteTable12A87883": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "bedevelopvpc76CB6355"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BeNodeHapiPg/be-develop-vpc/private-subnetSubnet3"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "bedevelopvpcprivatesubnetSubnet3RouteTableAssociationDD440985": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "bedevelopvpcprivatesubnetSubnet3RouteTable12A87883"
+    },
+    "SubnetId": {
+     "Ref": "bedevelopvpcprivatesubnetSubnet3Subnet8B52189C"
+    }
+   }
+  },
+  "bedevelopvpcprivatesubnetSubnet3DefaultRouteC0D97DDF": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "bedevelopvpcprivatesubnetSubnet3RouteTable12A87883"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "bedevelopvpcpublicsubnetSubnet1NATGateway7117929B"
+    }
+   }
+  },
+  "bedevelopvpcIGW1587A902": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BeNodeHapiPg/be-develop-vpc"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "bedevelopvpcVPCGW921C4F66": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "VpcId": {
+     "Ref": "bedevelopvpc76CB6355"
+    },
+    "InternetGatewayId": {
+     "Ref": "bedevelopvpcIGW1587A902"
+    }
+   }
+  },
+  "bedevelopelbSG8DDD5033": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "dev-web-app-BeNodeHapiPg/be-develop-elbSG",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow http traffic",
+      "FromPort": 80,
+      "IpProtocol": "tcp",
+      "ToPort": 80
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "VpcId": {
+     "Ref": "bedevelopvpc76CB6355"
+    }
+   }
+  },
+  "bedevelopecsSG5A7E0BD4": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "dev-web-app-BeNodeHapiPg/be-develop-ecsSG",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "VpcId": {
+     "Ref": "bedevelopvpc76CB6355"
+    }
+   }
+  },
+  "bedevelopecsSGfromdevwebappBeNodeHapiPgbedevelopelbSGFB9CF208ALLPORTS6437ACA1": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "Application load balancer",
+    "FromPort": 0,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "bedevelopecsSG5A7E0BD4",
+      "GroupId"
+     ]
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "bedevelopelbSG8DDD5033",
+      "GroupId"
+     ]
+    },
+    "ToPort": 65535
+   }
+  },
+  "bedevelopecsSGfromdevwebappBeNodeHapiPgbedevelopelbSecurityGroupB095B54C9000727DBC58": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "Load balancer to target",
+    "FromPort": 9000,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "bedevelopecsSG5A7E0BD4",
+      "GroupId"
+     ]
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "bedevelopelbSecurityGroupCE812759",
+      "GroupId"
+     ]
+    },
+    "ToPort": 9000
+   }
+  },
+  "bedevelopecsSGfromdevwebappBeNodeHapiPgbedevelopelbSGFB9CF2089000E3357063": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "Load balancer to target",
+    "FromPort": 9000,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "bedevelopecsSG5A7E0BD4",
+      "GroupId"
+     ]
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "bedevelopelbSG8DDD5033",
+      "GroupId"
+     ]
+    },
+    "ToPort": 9000
+   }
+  },
+  "bedevelopdatabasesecuritygroupED25631E": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "dev-web-app-BeNodeHapiPg/be-develop-database-security-group",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "255.255.255.255/32",
+      "Description": "Disallow all traffic",
+      "FromPort": 252,
+      "IpProtocol": "icmp",
+      "ToPort": 86
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "VpcId": {
+     "Ref": "bedevelopvpc76CB6355"
+    }
+   }
+  },
+  "bedevelopdatabasesecuritygroupfromdevwebappBeNodeHapiPgbedevelopecsSGF1065F9F54326FF3BC99": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "Permit the database to accept requests from the fargate service",
+    "FromPort": 5432,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "bedevelopdatabasesecuritygroupED25631E",
+      "GroupId"
+     ]
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "bedevelopecsSG5A7E0BD4",
+      "GroupId"
+     ]
+    },
+    "ToPort": 5432
+   }
+  },
+  "bedevelopdatabasecredentialssecret19916F00": {
+   "Type": "AWS::SecretsManager::Secret",
+   "Properties": {
+    "Description": "Database credentials for be-develop",
+    "GenerateSecretString": {
+     "ExcludeCharacters": "\"@/\\ '",
+     "GenerateStringKey": "password",
+     "PasswordLength": 30,
+     "SecretStringTemplate": "{\"username\":\"username\"}"
+    },
+    "Name": "be-develop-database-credentials",
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "bedevelopdatabasecredentialssecretAttachment43AFFA8B": {
+   "Type": "AWS::SecretsManager::SecretTargetAttachment",
+   "Properties": {
+    "SecretId": {
+     "Ref": "bedevelopdatabasecredentialssecret19916F00"
+    },
+    "TargetId": {
+     "Ref": "bedevelopdatabaseinstance2E0D8132"
+    },
+    "TargetType": "AWS::RDS::DBInstance"
+   }
+  },
+  "bedevelopdatabaseinstanceSubnetGroup53239A54": {
+   "Type": "AWS::RDS::DBSubnetGroup",
+   "Properties": {
+    "DBSubnetGroupDescription": "Subnet group for be-develop-database-instance database",
+    "SubnetIds": [
+     {
+      "Ref": "bedevelopvpcprivatesubnetSubnet1Subnet8ABCB171"
+     },
+     {
+      "Ref": "bedevelopvpcprivatesubnetSubnet2Subnet662E9FA2"
+     },
+     {
+      "Ref": "bedevelopvpcprivatesubnetSubnet3Subnet8B52189C"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "bedevelopdatabaseinstance2E0D8132": {
+   "Type": "AWS::RDS::DBInstance",
+   "Properties": {
+    "AllocatedStorage": "10",
+    "BackupRetentionPeriod": 1,
+    "CopyTagsToSnapshot": true,
+    "DBInstanceClass": "db.t3.micro",
+    "DBName": "be_database",
+    "DBSubnetGroupName": {
+     "Ref": "bedevelopdatabaseinstanceSubnetGroup53239A54"
+    },
+    "Engine": "postgres",
+    "EngineVersion": "14.2",
+    "MasterUsername": "username",
+    "MasterUserPassword": {
+     "Fn::Join": [
+      "",
+      [
+       "{{resolve:secretsmanager:",
+       {
+        "Ref": "bedevelopdatabasecredentialssecret19916F00"
+       },
+       ":SecretString:password::}}"
+      ]
+     ]
+    },
+    "MaxAllocatedStorage": 30,
+    "PubliclyAccessible": false,
+    "StorageType": "gp2",
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "VPCSecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "bedevelopdatabasesecuritygroupED25631E",
+       "GroupId"
+      ]
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "bedevelopredissubnetgroup": {
+   "Type": "AWS::ElastiCache::SubnetGroup",
+   "Properties": {
+    "Description": "Subnet group for the redis cluster",
+    "SubnetIds": [
+     {
+      "Ref": "bedevelopvpcprivatesubnetSubnet1Subnet8ABCB171"
+     },
+     {
+      "Ref": "bedevelopvpcprivatesubnetSubnet2Subnet662E9FA2"
+     },
+     {
+      "Ref": "bedevelopvpcprivatesubnetSubnet3Subnet8B52189C"
+     }
+    ],
+    "CacheSubnetGroupName": "be-develop-redis-subnet-group",
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "bedevelopredissecuritygroup258843E4": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Security group for the redis cluster",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "VpcId": {
+     "Ref": "bedevelopvpc76CB6355"
+    }
+   }
+  },
+  "bedevelopredissecuritygroupfromdevwebappBeNodeHapiPgbedevelopecsSGF1065F9F6379D4EC40A7": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "Permit the redis cluster to accept requests from the fargate service",
+    "FromPort": 6379,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "bedevelopredissecuritygroup258843E4",
+      "GroupId"
+     ]
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "bedevelopecsSG5A7E0BD4",
+      "GroupId"
+     ]
+    },
+    "ToPort": 6379
+   }
+  },
+  "bedeveloprediscache": {
+   "Type": "AWS::ElastiCache::CacheCluster",
+   "Properties": {
+    "CacheNodeType": "cache.t3.micro",
+    "Engine": "redis",
+    "NumCacheNodes": 1,
+    "CacheSubnetGroupName": {
+     "Ref": "bedevelopredissubnetgroup"
+    },
+    "ClusterName": "be-develop-redis-cluster",
+    "EngineVersion": "6.2",
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "VpcSecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "bedevelopredissecuritygroup258843E4",
+       "GroupId"
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "bedevelopredissubnetgroup"
+   ]
+  },
+  "bedevelopcluster1CBCC87F": {
+   "Type": "AWS::ECS::Cluster",
+   "Properties": {
+    "ClusterName": "be-develop-cluster",
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "bedevelopelb3DD0D824": {
+   "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+   "Properties": {
+    "LoadBalancerAttributes": [
+     {
+      "Key": "deletion_protection.enabled",
+      "Value": "false"
+     }
+    ],
+    "Name": "be-develop-alb",
+    "Scheme": "internet-facing",
+    "SecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "bedevelopelbSecurityGroupCE812759",
+       "GroupId"
+      ]
+     },
+     {
+      "Fn::GetAtt": [
+       "bedevelopelbSG8DDD5033",
+       "GroupId"
+      ]
+     }
+    ],
+    "Subnets": [
+     {
+      "Ref": "bedevelopvpcpublicsubnetSubnet1SubnetB0121C69"
+     },
+     {
+      "Ref": "bedevelopvpcpublicsubnetSubnet2Subnet07F44778"
+     },
+     {
+      "Ref": "bedevelopvpcpublicsubnetSubnet3SubnetFB4EA845"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "Type": "application"
+   },
+   "DependsOn": [
+    "bedevelopvpcpublicsubnetSubnet1DefaultRoute0D7E48EA",
+    "bedevelopvpcpublicsubnetSubnet1RouteTableAssociation42B5F6CB",
+    "bedevelopvpcpublicsubnetSubnet2DefaultRouteCFE9107F",
+    "bedevelopvpcpublicsubnetSubnet2RouteTableAssociationD80586B2",
+    "bedevelopvpcpublicsubnetSubnet3DefaultRouteD8B98C36",
+    "bedevelopvpcpublicsubnetSubnet3RouteTableAssociation389B2C8D"
+   ]
+  },
+  "bedevelopelbSecurityGroupCE812759": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Automatically created Security Group for ELB devwebappBeNodeHapiPgbedevelopelb9497A74E",
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow from anyone on port 80",
+      "FromPort": 80,
+      "IpProtocol": "tcp",
+      "ToPort": 80
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "VpcId": {
+     "Ref": "bedevelopvpc76CB6355"
+    }
+   }
+  },
+  "bedevelopelbSecurityGrouptodevwebappBeNodeHapiPgbedevelopecsSGF1065F9F90002EDAA08C": {
+   "Type": "AWS::EC2::SecurityGroupEgress",
+   "Properties": {
+    "GroupId": {
+     "Fn::GetAtt": [
+      "bedevelopelbSecurityGroupCE812759",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "Description": "Load balancer to target",
+    "DestinationSecurityGroupId": {
+     "Fn::GetAtt": [
+      "bedevelopecsSG5A7E0BD4",
+      "GroupId"
+     ]
+    },
+    "FromPort": 9000,
+    "ToPort": 9000
+   }
+  },
+  "bedevelopelbListenerD47D2F61": {
+   "Type": "AWS::ElasticLoadBalancingV2::Listener",
+   "Properties": {
+    "DefaultActions": [
+     {
+      "TargetGroupArn": {
+       "Ref": "bedeveloptarget26CAD283"
+      },
+      "Type": "forward"
+     }
+    ],
+    "LoadBalancerArn": {
+     "Ref": "bedevelopelb3DD0D824"
+    },
+    "Port": 80,
+    "Protocol": "HTTP"
+   }
+  },
+  "bedeveloptarget26CAD283": {
+   "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+   "Properties": {
+    "HealthCheckPath": "/",
+    "HealthCheckProtocol": "HTTP",
+    "Port": 80,
+    "Protocol": "HTTP",
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "TargetGroupAttributes": [
+     {
+      "Key": "stickiness.enabled",
+      "Value": "false"
+     }
+    ],
+    "TargetType": "ip",
+    "VpcId": {
+     "Ref": "bedevelopvpc76CB6355"
+    }
+   }
+  },
+  "bedeveloptaskrole7E2F6F60": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Description": "Role that the api task definitions use to run the api code",
+    "RoleName": "be-develop-task-role",
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "bedeveloptask5D6B8D85": {
+   "Type": "AWS::ECS::TaskDefinition",
+   "Properties": {
+    "ContainerDefinitions": [
+     {
+      "Environment": [
+       {
+        "Name": "BUILD_NAME",
+        "Value": "develop"
+       },
+       {
+        "Name": "ENVIRONMENT_NAME",
+        "Value": "development"
+       },
+       {
+        "Name": "DB_URI",
+        "Value": {
+         "Fn::Join": [
+          "",
+          [
+           "postgres://{{resolve:secretsmanager:",
+           {
+            "Ref": "bedevelopdatabasecredentialssecret19916F00"
+           },
+           ":SecretString:username::}}:{{resolve:secretsmanager:",
+           {
+            "Ref": "bedevelopdatabasecredentialssecret19916F00"
+           },
+           ":SecretString:password::}}@",
+           {
+            "Fn::GetAtt": [
+             "bedevelopdatabaseinstance2E0D8132",
+             "Endpoint.Address"
+            ]
+           },
+           "/be_database"
+          ]
+         ]
+        }
+       },
+       {
+        "Name": "POSTGRES_HOST",
+        "Value": {
+         "Fn::GetAtt": [
+          "bedevelopdatabaseinstance2E0D8132",
+          "Endpoint.Address"
+         ]
+        }
+       },
+       {
+        "Name": "REDIS_HOST",
+        "Value": {
+         "Fn::GetAtt": [
+          "bedeveloprediscache",
+          "RedisEndpoint.Address"
+         ]
+        }
+       }
+      ],
+      "Essential": true,
+      "Image": {
+       "Fn::Sub": "511522223657.dkr.ecr.ap-south-1.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-511522223657-ap-south-1:920c87ba3f7f501472b9ed4f4ab82cea80bd0168bf7f61a2f617601ef6fa5719"
+      },
+      "LogConfiguration": {
+       "LogDriver": "awslogs",
+       "Options": {
+        "awslogs-group": {
+         "Ref": "bedeveloptaskbedevelopcontainerLogGroup53CC6C01"
+        },
+        "awslogs-stream-prefix": "be-develop-log-group",
+        "awslogs-region": "ap-south-1"
+       }
+      },
+      "Memory": 512,
+      "Name": "be-develop-container",
+      "PortMappings": [
+       {
+        "ContainerPort": 9000,
+        "Protocol": "tcp"
+       }
+      ]
+     }
+    ],
+    "Cpu": "256",
+    "ExecutionRoleArn": {
+     "Fn::GetAtt": [
+      "bedeveloptaskExecutionRole5F605120",
+      "Arn"
+     ]
+    },
+    "Family": "be-develop-task",
+    "Memory": "512",
+    "NetworkMode": "awsvpc",
+    "RequiresCompatibilities": [
+     "EC2",
+     "FARGATE"
+    ],
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "TaskRoleArn": {
+     "Fn::GetAtt": [
+      "bedeveloptaskrole7E2F6F60",
+      "Arn"
+     ]
+    }
+   }
+  },
+  "bedeveloptaskbedevelopcontainerLogGroup53CC6C01": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "bedeveloptaskExecutionRole5F605120": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "bedeveloptaskExecutionRoleDefaultPolicyD3F3FB6B": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchGetImage"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":ecr:ap-south-1:511522223657:repository/cdk-hnb659fds-container-assets-511522223657-ap-south-1"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": "ecr:GetAuthorizationToken",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "bedeveloptaskbedevelopcontainerLogGroup53CC6C01",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "bedeveloptaskExecutionRoleDefaultPolicyD3F3FB6B",
+    "Roles": [
+     {
+      "Ref": "bedeveloptaskExecutionRole5F605120"
+     }
+    ]
+   }
+  },
+  "bedevelopserviceService1EE878D4": {
+   "Type": "AWS::ECS::Service",
+   "Properties": {
+    "Cluster": {
+     "Ref": "bedevelopcluster1CBCC87F"
+    },
+    "DeploymentConfiguration": {
+     "MaximumPercent": 200,
+     "MinimumHealthyPercent": 50
+    },
+    "DesiredCount": 1,
+    "EnableECSManagedTags": false,
+    "HealthCheckGracePeriodSeconds": 60,
+    "LaunchType": "FARGATE",
+    "LoadBalancers": [
+     {
+      "ContainerName": "be-develop-container",
+      "ContainerPort": 9000,
+      "TargetGroupArn": {
+       "Ref": "bedeveloptarget26CAD283"
+      }
+     }
+    ],
+    "NetworkConfiguration": {
+     "AwsvpcConfiguration": {
+      "AssignPublicIp": "ENABLED",
+      "SecurityGroups": [
+       {
+        "Fn::GetAtt": [
+         "bedevelopecsSG5A7E0BD4",
+         "GroupId"
+        ]
+       }
+      ],
+      "Subnets": [
+       {
+        "Ref": "bedevelopvpcpublicsubnetSubnet1SubnetB0121C69"
+       },
+       {
+        "Ref": "bedevelopvpcpublicsubnetSubnet2Subnet07F44778"
+       },
+       {
+        "Ref": "bedevelopvpcpublicsubnetSubnet3SubnetFB4EA845"
+       }
+      ]
+     }
+    },
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "TaskDefinition": {
+     "Ref": "bedeveloptask5D6B8D85"
+    }
+   },
+   "DependsOn": [
+    "bedevelopelbListenerD47D2F61"
+   ]
+  }
+ },
+ "Outputs": {
+  "databasehost": {
+   "Value": {
+    "Fn::GetAtt": [
+     "bedevelopdatabaseinstance2E0D8132",
+     "Endpoint.Address"
+    ]
+   },
+   "Export": {
+    "Name": "database-host"
+   }
+  },
+  "databasename": {
+   "Value": "be_database",
+   "Export": {
+    "Name": "database-name"
+   }
+  },
+  "redishost": {
+   "Value": {
+    "Fn::GetAtt": [
+     "bedeveloprediscache",
+     "RedisEndpoint.Address"
+    ]
+   },
+   "Export": {
+    "Name": "redis-host"
+   }
+  },
+  "loadbalancerdns": {
+   "Value": {
+    "Fn::GetAtt": [
+     "bedevelopelb3DD0D824",
+     "DNSName"
+    ]
+   },
+   "Export": {
+    "Name": "load-balancer-dns"
+   }
+  },
+  "awsregion": {
+   "Value": "ap-south-1",
+   "Export": {
+    "Name": "aws-region"
+   }
+  },
+  "elasticcontainerregistryrepo": {
+   "Value": "cdk-hnb659fds-container-assets-511522223657-ap-south-1",
+   "Export": {
+    "Name": "elastic-container-registry-repo"
+   }
+  },
+  "image": {
+   "Value": {
+    "Fn::Sub": "511522223657.dkr.ecr.ap-south-1.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-511522223657-ap-south-1:920c87ba3f7f501472b9ed4f4ab82cea80bd0168bf7f61a2f617601ef6fa5719"
+   },
+   "Export": {
+    "Name": "image"
+   }
+  },
+  "taskdefinitionarn": {
+   "Value": {
+    "Ref": "bedeveloptask5D6B8D85"
+   },
+   "Export": {
+    "Name": "task-definition"
+   }
+  },
+  "taskrole": {
+   "Value": {
+    "Fn::GetAtt": [
+     "bedeveloptaskrole7E2F6F60",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "task-role"
+   }
+  },
+  "executionrole": {
+   "Value": {
+    "Fn::GetAtt": [
+     "bedeveloptaskExecutionRole5F605120",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "execution-role"
+   }
+  },
+  "family": {
+   "Value": "be-develop-task",
+   "Export": {
+    "Name": "family"
+   }
+  },
+  "containername": {
+   "Value": "be-develop-container",
+   "Export": {
+    "Name": "container-name"
+   }
+  },
+  "containerport": {
+   "Value": "9000",
+   "Export": {
+    "Name": "container-port"
+   }
+  },
+  "logdriver": {
+   "Value": "awslogs",
+   "Export": {
+    "Name": "log-driver"
+   }
+  },
+  "logdriveroptions": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "{\"awslogs-group\":\"",
+      {
+       "Ref": "bedeveloptaskbedevelopcontainerLogGroup53CC6C01"
+      },
+      "\",\"awslogs-stream-prefix\":\"be-develop-log-group\",\"awslogs-region\":\"ap-south-1\"}"
+     ]
+    ]
+   },
+   "Export": {
+    "Name": "log-driver-options"
+   }
+  },
+  "SSTMetadata": {
+   "Value": "{\"app\":\"web-app\",\"stage\":\"dev\",\"version\":\"2.7.2\",\"metadata\":[]}"
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

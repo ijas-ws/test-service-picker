@@ -1,0 +1,52 @@
+{
+  "version": "31.0.0",
+  "files": {
+    "4ed08e2ef7e90b87425eb697b20beb1d32e59b875b2fb53103465ca3b6aa94c9": {
+      "source": {
+        "path": "asset.4ed08e2ef7e90b87425eb697b20beb1d32e59b875b2fb53103465ca3b6aa94c9",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "511522223657-ap-south-1": {
+          "bucketName": "cdk-hnb659fds-assets-511522223657-ap-south-1",
+          "objectKey": "4ed08e2ef7e90b87425eb697b20beb1d32e59b875b2fb53103465ca3b6aa94c9.zip",
+          "region": "ap-south-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::511522223657:role/cdk-hnb659fds-file-publishing-role-511522223657-ap-south-1"
+        }
+      }
+    },
+    "5c49b5da34f6391c8050ad2b2873bbcae485375c391d098d118ca0d857056ef7": {
+      "source": {
+        "path": "dev-web-app-BeNodeHapiPg.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "511522223657-ap-south-1": {
+          "bucketName": "cdk-hnb659fds-assets-511522223657-ap-south-1",
+          "objectKey": "5c49b5da34f6391c8050ad2b2873bbcae485375c391d098d118ca0d857056ef7.json",
+          "region": "ap-south-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::511522223657:role/cdk-hnb659fds-file-publishing-role-511522223657-ap-south-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {
+    "920c87ba3f7f501472b9ed4f4ab82cea80bd0168bf7f61a2f617601ef6fa5719": {
+      "source": {
+        "directory": "asset.920c87ba3f7f501472b9ed4f4ab82cea80bd0168bf7f61a2f617601ef6fa5719",
+        "dockerBuildArgs": {
+          "ENVIRONMENT_NAME": "development"
+        },
+        "platform": "linux/amd64"
+      },
+      "destinations": {
+        "511522223657-ap-south-1": {
+          "repositoryName": "cdk-hnb659fds-container-assets-511522223657-ap-south-1",
+          "imageTag": "920c87ba3f7f501472b9ed4f4ab82cea80bd0168bf7f61a2f617601ef6fa5719",
+          "region": "ap-south-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::511522223657:role/cdk-hnb659fds-image-publishing-role-511522223657-ap-south-1"
+        }
+      }
+    }
+  }
+}

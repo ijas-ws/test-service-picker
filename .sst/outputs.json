@@ -1,0 +1,28 @@
+{
+  "dev-web-app-FeNextJsWeb": {
+    "distributionId": "E34PM023JXDT9K",
+    "bucketName": "fe-next-js-web-develop",
+    "SiteUrl": "https://djfn349obriq5.cloudfront.net"
+  },
+  "dev-web-app-BeNodeHapiPg": {
+    "taskrole": "arn:aws:iam::511522223657:role/be-develop-task-role",
+    "image": "511522223657.dkr.ecr.ap-south-1.amazonaws.com/cdk-hnb659fds-container-assets-511522223657-ap-south-1:920c87ba3f7f501472b9ed4f4ab82cea80bd0168bf7f61a2f617601ef6fa5719",
+    "containername": "be-develop-container",
+    "containerport": "9000",
+    "databasehost": "dev-web-app-benodehapipg-bedevelopdatabaseinstance-wcz1ktvjq0tm.cvnyo3tm4lck.ap-south-1.rds.amazonaws.com",
+    "executionrole": "arn:aws:iam::511522223657:role/dev-web-app-BeNodeHapiPg-bedeveloptaskExecutionRol-13CRSPN8PUO8Q",
+    "redishost": "be-develop-redis-cluster.9txi6w.0001.aps1.cache.amazonaws.com",
+    "taskdefinitionarn": "arn:aws:ecs:ap-south-1:511522223657:task-definition/be-develop-task:12",
+    "logdriver": "awslogs",
+    "logdriveroptions": {
+      "awslogs-group": "dev-web-app-BeNodeHapiPg-bedeveloptaskbedevelopcontainerLogGroup53CC6C01-IDmVQ43ZgJGq",
+      "awslogs-stream-prefix": "be-develop-log-group",
+      "awslogs-region": "ap-south-1"
+    },
+    "loadbalancerdns": "be-develop-alb-330301671.ap-south-1.elb.amazonaws.com",
+    "databasename": "be_database",
+    "family": "be-develop-task",
+    "awsregion": "ap-south-1",
+    "elasticcontainerregistryrepo": "cdk-hnb659fds-container-assets-511522223657-ap-south-1"
+  }
+}
