@@ -7,7 +7,7 @@ declare module "sst/node/config" {
 }import "sst/node/site";
 declare module "sst/node/site" {
   export interface StaticSiteResources {
-    "FeNextJsWebSite": {
+    "FetestNextJsWebSite": {
       url: string;
     }
   }
