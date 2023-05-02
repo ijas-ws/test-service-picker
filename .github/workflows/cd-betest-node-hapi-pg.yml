@@ -19,8 +19,6 @@ jobs:
       - name: Get branch name
         id: vars
         run: echo ::set-output name=short_ref::${GITHUB_REF_NAME}
-        env:
-          CI: true
 
       # Configure AWS with credentials
       - name: Configure AWS Credentials
@@ -29,27 +27,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-
-      # Populate existing .env with required envs (master only)
-      - name: Append AWS ENVs in the .env file
-        if: github.ref == 'refs/heads/master'
-        run: |
-          echo AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} >> .env
-          echo AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} >> .env
-
-      # Populate existing .env.qa with required envs (qa only)
-      - name: Append AWS ENVs in the .env.qa file
-        if: github.ref == 'refs/heads/qa'
-        run: |
-          echo AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} >> .env.qa
-          echo AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID}} >> .env.qa
-
-      # Populate existing .env.development with required envs (develop only)
-      - name: Append AWS ENVs in the .env.development file
-        if: github.ref == 'refs/heads/develop'
-        run: |
-          echo AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} >> .env.development
-          echo AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} >> .env.development
 
       # Login to Amazon ECR
       - name: Login to Amazon ECR
