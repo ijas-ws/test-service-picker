@@ -1,6 +1,6 @@
 export const ONE_USER_DATA = {
   id: 1,
-  first_name: 'mac',
+  first_name: 'ijas',
   last_name: 'ijas',
   email: 'mac@wednesday.is',
 };
