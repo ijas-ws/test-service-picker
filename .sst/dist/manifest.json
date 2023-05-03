@@ -1,0 +1,557 @@
+{
+  "version": "31.0.0",
+  "artifacts": {
+    "dev-web-app-BackendNodeHapiPg.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "dev-web-app-BackendNodeHapiPg.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "dev-web-app-BackendNodeHapiPg": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://511522223657/ap-south-1",
+      "properties": {
+        "templateFile": "dev-web-app-BackendNodeHapiPg.template.json",
+        "tags": {
+          "sst:app": "web-app",
+          "sst:stage": "dev"
+        },
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::511522223657:role/cdk-hnb659fds-deploy-role-511522223657-ap-south-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::511522223657:role/cdk-hnb659fds-cfn-exec-role-511522223657-ap-south-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-511522223657-ap-south-1/215d25c566bf95c1bd4628d373133668e537889fe30feb0ea061728ad456a4a6.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "dev-web-app-BackendNodeHapiPg.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::511522223657:role/cdk-hnb659fds-lookup-role-511522223657-ap-south-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "dev-web-app-BackendNodeHapiPg.assets"
+      ],
+      "metadata": {
+        "/dev-web-app-BackendNodeHapiPg": [
+          {
+            "type": "aws:cdk:stack-tags",
+            "data": [
+              {
+                "Key": "sst:app",
+                "Value": "web-app"
+              },
+              {
+                "Key": "sst:stage",
+                "Value": "dev"
+              }
+            ]
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/CustomResourceHandler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomResourceHandlerServiceRole41AEC181"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/CustomResourceHandler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomResourceHandlerE8FB56BA"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdevelopD77C39DE"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdeveloppublicsubnetSubnet1Subnet05F6E0BF"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdeveloppublicsubnetSubnet1RouteTableD36CBEF3"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdeveloppublicsubnetSubnet1RouteTableAssociation4639C9F4"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdeveloppublicsubnetSubnet1DefaultRoute1D70EDBE"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdeveloppublicsubnetSubnet1EIP5D129422"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdeveloppublicsubnetSubnet1NATGateway5F7BC853"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdeveloppublicsubnetSubnet2SubnetF1E64EC8"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdeveloppublicsubnetSubnet2RouteTableAFDF9214"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdeveloppublicsubnetSubnet2RouteTableAssociation41765F5E"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdeveloppublicsubnetSubnet2DefaultRoute5F1646B3"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet3/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdeveloppublicsubnetSubnet3Subnet254CD5FB"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet3/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdeveloppublicsubnetSubnet3RouteTableB665AE1E"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet3/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdeveloppublicsubnetSubnet3RouteTableAssociation2FCFB296"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet3/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdeveloppublicsubnetSubnet3DefaultRoute69B080AD"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/private-subnetSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdevelopprivatesubnetSubnet1SubnetB9DB15DB"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/private-subnetSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdevelopprivatesubnetSubnet1RouteTableAFA37FC6"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/private-subnetSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdevelopprivatesubnetSubnet1RouteTableAssociation17E2CE08"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/private-subnetSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdevelopprivatesubnetSubnet1DefaultRouteAB6EF113"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/private-subnetSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdevelopprivatesubnetSubnet2Subnet8E63D026"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/private-subnetSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdevelopprivatesubnetSubnet2RouteTableFB6DB41E"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/private-subnetSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdevelopprivatesubnetSubnet2RouteTableAssociation355599DC"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/private-subnetSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdevelopprivatesubnetSubnet2DefaultRoute8F5E9F0B"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/private-subnetSubnet3/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdevelopprivatesubnetSubnet3Subnet3C938309"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/private-subnetSubnet3/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdevelopprivatesubnetSubnet3RouteTable99DFCCAA"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/private-subnetSubnet3/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdevelopprivatesubnetSubnet3RouteTableAssociation96062439"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/private-subnetSubnet3/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdevelopprivatesubnetSubnet3DefaultRoute5AA7D82B"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdevelopIGW5179AC6B"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-vpc-develop/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendvpcdevelopVPCGWA230C993"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-elb-security-group-develop/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendelbsecuritygroupdevelop0DEDF79C"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-ecsSG/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendecsSGEFB80C61"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-ecsSG/from devwebappBackendNodeHapiPgbackendelbsecuritygroupdevelop5336EB5C:ALL PORTS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendecsSGfromdevwebappBackendNodeHapiPgbackendelbsecuritygroupdevelop5336EB5CALLPORTS61A2550D"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-ecsSG/from devwebappBackendNodeHapiPgbackendelbdevelopSecurityGroup6505BBF7:9000": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendecsSGfromdevwebappBackendNodeHapiPgbackendelbdevelopSecurityGroup6505BBF7900031194DC8"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-ecsSG/from devwebappBackendNodeHapiPgbackendelbsecuritygroupdevelop5336EB5C:9000": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendecsSGfromdevwebappBackendNodeHapiPgbackendelbsecuritygroupdevelop5336EB5C90003362FD27"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-database-security-group-develop/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backenddatabasesecuritygroupdevelopB7AFB149"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-database-security-group-develop/from devwebappBackendNodeHapiPgbackendecsSG555AC1E7:5432": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backenddatabasesecuritygroupdevelopfromdevwebappBackendNodeHapiPgbackendecsSG555AC1E754328FEEF917"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-database-credentials-secret-develop/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backenddatabasecredentialssecretdevelop0459C4C0"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-database-credentials-secret-develop/Attachment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backenddatabasecredentialssecretdevelopAttachment89251DA0"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-database-instance-develop/SubnetGroup/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backenddatabaseinstancedevelopSubnetGroupC4DA765F"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-database-instance-develop/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backenddatabaseinstancedevelop0D44DC78"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-redis-subnet-group-develop": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendredissubnetgroupdevelop"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-redis-security-group-develop/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendredissecuritygroupdevelop62B409A1"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-redis-security-group-develop/from devwebappBackendNodeHapiPgbackendecsSG555AC1E7:6379": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendredissecuritygroupdevelopfromdevwebappBackendNodeHapiPgbackendecsSG555AC1E76379A2E54E67"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-redis-cache-develop": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendrediscachedevelop"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-cluster/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendclusterB739C427"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-elb-develop/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendelbdevelop23FB0BCE"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-elb-develop/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendelbdevelopSecurityGroup9B78FC14"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-elb-develop/SecurityGroup/to devwebappBackendNodeHapiPgbackendecsSG555AC1E7:9000": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendelbdevelopSecurityGrouptodevwebappBackendNodeHapiPgbackendecsSG555AC1E79000F3DA8757"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-elb-develop/Listener/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendelbdevelopListenerCB705F99"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-target-develop/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendtargetdevelopBB1237CC"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-task-role-develop/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendtaskroledevelopF71616F8"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-task-role-develop/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendtaskroledevelopDefaultPolicy4085D53F"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-task-develop/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendtaskdevelopF494421E"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-task-develop/backend-container-develop/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendtaskdevelopbackendcontainerdevelopLogGroup55D45150"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-task-develop/ExecutionRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendtaskdevelopExecutionRole0DD8755A"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-task-develop/ExecutionRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendtaskdevelopExecutionRoleDefaultPolicyA1162041"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/backend-service-develop/Service": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendservicedevelopService36EA188C"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/databaseHost": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "databaseHost"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/databaseName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "databaseName"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/redisHost": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "redisHost"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/loadBalancerDns": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "loadBalancerDns"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/awsRegion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsRegion"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/elasticContainerRegistryRepo": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "elasticContainerRegistryRepo"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/image": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "image"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/taskDefinition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "taskDefinition"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/taskRole": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "taskRole"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/executionRole": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "executionRole"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/family": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "family"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/containerName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "containerName"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/containerPort": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "containerPort"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/logDriver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "logDriver"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/logDriverOptions": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "logDriverOptions"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/serviceName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "serviceName"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/clusterName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "clusterName"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/secretName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "secretName"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/secretArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "secretArn"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/secretFullArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "secretFullArn"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/SSTStackOutputSSTMetadata": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SSTMetadata"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/dev-web-app-BackendNodeHapiPg/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "dev-web-app-BackendNodeHapiPg"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}
