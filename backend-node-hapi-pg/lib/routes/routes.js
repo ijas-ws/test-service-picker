@@ -9,7 +9,7 @@ export default [
       const message = 'Health check up and running!';
       logger().info(message);
       return h.response({
-        data: 'Hapi template at your service by service-picker',
+        data: 'Hapi template at your service -service-picker',
       });
     },
     options: {
