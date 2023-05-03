@@ -58,7 +58,7 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.backend-container.outputs.task-definition }}
-          service: backend-service-${{ steps.vars.outputs.short_ref }}
+          service: dev-web-app-BackendNodeHapiPg-backendservicedevelopService36EA188C-aAX4rea6z20Q
           cluster: backend-cluster-${{ steps.vars.outputs.short_ref }}
 
       # Logout of Amazon
