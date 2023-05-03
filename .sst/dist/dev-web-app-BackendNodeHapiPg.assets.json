@@ -1,0 +1,52 @@
+{
+  "version": "31.0.0",
+  "files": {
+    "d54eb441f121354a0c2fa83e12adee15dc5c72b38cec0218ad04931b9f87a3d1": {
+      "source": {
+        "path": "asset.d54eb441f121354a0c2fa83e12adee15dc5c72b38cec0218ad04931b9f87a3d1",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "511522223657-ap-south-1": {
+          "bucketName": "cdk-hnb659fds-assets-511522223657-ap-south-1",
+          "objectKey": "d54eb441f121354a0c2fa83e12adee15dc5c72b38cec0218ad04931b9f87a3d1.zip",
+          "region": "ap-south-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::511522223657:role/cdk-hnb659fds-file-publishing-role-511522223657-ap-south-1"
+        }
+      }
+    },
+    "215d25c566bf95c1bd4628d373133668e537889fe30feb0ea061728ad456a4a6": {
+      "source": {
+        "path": "dev-web-app-BackendNodeHapiPg.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "511522223657-ap-south-1": {
+          "bucketName": "cdk-hnb659fds-assets-511522223657-ap-south-1",
+          "objectKey": "215d25c566bf95c1bd4628d373133668e537889fe30feb0ea061728ad456a4a6.json",
+          "region": "ap-south-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::511522223657:role/cdk-hnb659fds-file-publishing-role-511522223657-ap-south-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {
+    "7b5e67a131c945f51c6b511bc5e8c62726475649630c944b26e3b6b3fd678fdd": {
+      "source": {
+        "directory": "asset.7b5e67a131c945f51c6b511bc5e8c62726475649630c944b26e3b6b3fd678fdd",
+        "dockerBuildArgs": {
+          "ENVIRONMENT_NAME": "development"
+        },
+        "platform": "linux/amd64"
+      },
+      "destinations": {
+        "511522223657-ap-south-1": {
+          "repositoryName": "cdk-hnb659fds-container-assets-511522223657-ap-south-1",
+          "imageTag": "7b5e67a131c945f51c6b511bc5e8c62726475649630c944b26e3b6b3fd678fdd",
+          "region": "ap-south-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::511522223657:role/cdk-hnb659fds-image-publishing-role-511522223657-ap-south-1"
+        }
+      }
+    }
+  }
+}

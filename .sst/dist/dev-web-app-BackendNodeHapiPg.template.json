@@ -1,0 +1,1806 @@
+{
+ "Resources": {
+  "CustomResourceHandlerServiceRole41AEC181": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "CustomResourceHandlerE8FB56BA": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-511522223657-ap-south-1",
+     "S3Key": "d54eb441f121354a0c2fa83e12adee15dc5c72b38cec0218ad04931b9f87a3d1.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomResourceHandlerServiceRole41AEC181",
+      "Arn"
+     ]
+    },
+    "Handler": "index.handler",
+    "MemorySize": 1024,
+    "Runtime": "nodejs16.x",
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "Timeout": 900
+   },
+   "DependsOn": [
+    "CustomResourceHandlerServiceRole41AEC181"
+   ]
+  },
+  "backendvpcdevelopD77C39DE": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BackendNodeHapiPg/backend-vpc-develop"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "backendvpcdeveloppublicsubnetSubnet1Subnet05F6E0BF": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "backendvpcdevelopD77C39DE"
+    },
+    "AvailabilityZone": "ap-south-1a",
+    "CidrBlock": "10.0.0.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "public-subnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet1"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "backendvpcdeveloppublicsubnetSubnet1RouteTableD36CBEF3": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "backendvpcdevelopD77C39DE"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet1"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "backendvpcdeveloppublicsubnetSubnet1RouteTableAssociation4639C9F4": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "backendvpcdeveloppublicsubnetSubnet1RouteTableD36CBEF3"
+    },
+    "SubnetId": {
+     "Ref": "backendvpcdeveloppublicsubnetSubnet1Subnet05F6E0BF"
+    }
+   }
+  },
+  "backendvpcdeveloppublicsubnetSubnet1DefaultRoute1D70EDBE": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "backendvpcdeveloppublicsubnetSubnet1RouteTableD36CBEF3"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "backendvpcdevelopIGW5179AC6B"
+    }
+   },
+   "DependsOn": [
+    "backendvpcdevelopVPCGWA230C993"
+   ]
+  },
+  "backendvpcdeveloppublicsubnetSubnet1EIP5D129422": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet1"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "backendvpcdeveloppublicsubnetSubnet1NATGateway5F7BC853": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "backendvpcdeveloppublicsubnetSubnet1Subnet05F6E0BF"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "backendvpcdeveloppublicsubnetSubnet1EIP5D129422",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet1"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   },
+   "DependsOn": [
+    "backendvpcdeveloppublicsubnetSubnet1DefaultRoute1D70EDBE",
+    "backendvpcdeveloppublicsubnetSubnet1RouteTableAssociation4639C9F4"
+   ]
+  },
+  "backendvpcdeveloppublicsubnetSubnet2SubnetF1E64EC8": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "backendvpcdevelopD77C39DE"
+    },
+    "AvailabilityZone": "ap-south-1b",
+    "CidrBlock": "10.0.1.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "public-subnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet2"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "backendvpcdeveloppublicsubnetSubnet2RouteTableAFDF9214": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "backendvpcdevelopD77C39DE"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet2"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "backendvpcdeveloppublicsubnetSubnet2RouteTableAssociation41765F5E": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "backendvpcdeveloppublicsubnetSubnet2RouteTableAFDF9214"
+    },
+    "SubnetId": {
+     "Ref": "backendvpcdeveloppublicsubnetSubnet2SubnetF1E64EC8"
+    }
+   }
+  },
+  "backendvpcdeveloppublicsubnetSubnet2DefaultRoute5F1646B3": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "backendvpcdeveloppublicsubnetSubnet2RouteTableAFDF9214"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "backendvpcdevelopIGW5179AC6B"
+    }
+   },
+   "DependsOn": [
+    "backendvpcdevelopVPCGWA230C993"
+   ]
+  },
+  "backendvpcdeveloppublicsubnetSubnet3Subnet254CD5FB": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "backendvpcdevelopD77C39DE"
+    },
+    "AvailabilityZone": "ap-south-1c",
+    "CidrBlock": "10.0.2.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "public-subnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet3"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "backendvpcdeveloppublicsubnetSubnet3RouteTableB665AE1E": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "backendvpcdevelopD77C39DE"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BackendNodeHapiPg/backend-vpc-develop/public-subnetSubnet3"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "backendvpcdeveloppublicsubnetSubnet3RouteTableAssociation2FCFB296": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "backendvpcdeveloppublicsubnetSubnet3RouteTableB665AE1E"
+    },
+    "SubnetId": {
+     "Ref": "backendvpcdeveloppublicsubnetSubnet3Subnet254CD5FB"
+    }
+   }
+  },
+  "backendvpcdeveloppublicsubnetSubnet3DefaultRoute69B080AD": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "backendvpcdeveloppublicsubnetSubnet3RouteTableB665AE1E"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "backendvpcdevelopIGW5179AC6B"
+    }
+   },
+   "DependsOn": [
+    "backendvpcdevelopVPCGWA230C993"
+   ]
+  },
+  "backendvpcdevelopprivatesubnetSubnet1SubnetB9DB15DB": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "backendvpcdevelopD77C39DE"
+    },
+    "AvailabilityZone": "ap-south-1a",
+    "CidrBlock": "10.0.3.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "private-subnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BackendNodeHapiPg/backend-vpc-develop/private-subnetSubnet1"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "backendvpcdevelopprivatesubnetSubnet1RouteTableAFA37FC6": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "backendvpcdevelopD77C39DE"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BackendNodeHapiPg/backend-vpc-develop/private-subnetSubnet1"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "backendvpcdevelopprivatesubnetSubnet1RouteTableAssociation17E2CE08": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "backendvpcdevelopprivatesubnetSubnet1RouteTableAFA37FC6"
+    },
+    "SubnetId": {
+     "Ref": "backendvpcdevelopprivatesubnetSubnet1SubnetB9DB15DB"
+    }
+   }
+  },
+  "backendvpcdevelopprivatesubnetSubnet1DefaultRouteAB6EF113": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "backendvpcdevelopprivatesubnetSubnet1RouteTableAFA37FC6"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "backendvpcdeveloppublicsubnetSubnet1NATGateway5F7BC853"
+    }
+   }
+  },
+  "backendvpcdevelopprivatesubnetSubnet2Subnet8E63D026": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "backendvpcdevelopD77C39DE"
+    },
+    "AvailabilityZone": "ap-south-1b",
+    "CidrBlock": "10.0.4.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "private-subnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BackendNodeHapiPg/backend-vpc-develop/private-subnetSubnet2"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "backendvpcdevelopprivatesubnetSubnet2RouteTableFB6DB41E": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "backendvpcdevelopD77C39DE"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BackendNodeHapiPg/backend-vpc-develop/private-subnetSubnet2"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "backendvpcdevelopprivatesubnetSubnet2RouteTableAssociation355599DC": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "backendvpcdevelopprivatesubnetSubnet2RouteTableFB6DB41E"
+    },
+    "SubnetId": {
+     "Ref": "backendvpcdevelopprivatesubnetSubnet2Subnet8E63D026"
+    }
+   }
+  },
+  "backendvpcdevelopprivatesubnetSubnet2DefaultRoute8F5E9F0B": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "backendvpcdevelopprivatesubnetSubnet2RouteTableFB6DB41E"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "backendvpcdeveloppublicsubnetSubnet1NATGateway5F7BC853"
+    }
+   }
+  },
+  "backendvpcdevelopprivatesubnetSubnet3Subnet3C938309": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "backendvpcdevelopD77C39DE"
+    },
+    "AvailabilityZone": "ap-south-1c",
+    "CidrBlock": "10.0.5.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "private-subnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BackendNodeHapiPg/backend-vpc-develop/private-subnetSubnet3"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "backendvpcdevelopprivatesubnetSubnet3RouteTable99DFCCAA": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "backendvpcdevelopD77C39DE"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BackendNodeHapiPg/backend-vpc-develop/private-subnetSubnet3"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "backendvpcdevelopprivatesubnetSubnet3RouteTableAssociation96062439": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "backendvpcdevelopprivatesubnetSubnet3RouteTable99DFCCAA"
+    },
+    "SubnetId": {
+     "Ref": "backendvpcdevelopprivatesubnetSubnet3Subnet3C938309"
+    }
+   }
+  },
+  "backendvpcdevelopprivatesubnetSubnet3DefaultRoute5AA7D82B": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "backendvpcdevelopprivatesubnetSubnet3RouteTable99DFCCAA"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "backendvpcdeveloppublicsubnetSubnet1NATGateway5F7BC853"
+    }
+   }
+  },
+  "backendvpcdevelopIGW5179AC6B": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "dev-web-app-BackendNodeHapiPg/backend-vpc-develop"
+     },
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "backendvpcdevelopVPCGWA230C993": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "VpcId": {
+     "Ref": "backendvpcdevelopD77C39DE"
+    },
+    "InternetGatewayId": {
+     "Ref": "backendvpcdevelopIGW5179AC6B"
+    }
+   }
+  },
+  "backendelbsecuritygroupdevelop0DEDF79C": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "dev-web-app-BackendNodeHapiPg/backend-elb-security-group-develop",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow http traffic",
+      "FromPort": 80,
+      "IpProtocol": "tcp",
+      "ToPort": 80
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "VpcId": {
+     "Ref": "backendvpcdevelopD77C39DE"
+    }
+   }
+  },
+  "backendecsSGEFB80C61": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "dev-web-app-BackendNodeHapiPg/backend-ecsSG",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "VpcId": {
+     "Ref": "backendvpcdevelopD77C39DE"
+    }
+   }
+  },
+  "backendecsSGfromdevwebappBackendNodeHapiPgbackendelbsecuritygroupdevelop5336EB5CALLPORTS61A2550D": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "Application load balancer",
+    "FromPort": 0,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "backendecsSGEFB80C61",
+      "GroupId"
+     ]
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "backendelbsecuritygroupdevelop0DEDF79C",
+      "GroupId"
+     ]
+    },
+    "ToPort": 65535
+   }
+  },
+  "backendecsSGfromdevwebappBackendNodeHapiPgbackendelbdevelopSecurityGroup6505BBF7900031194DC8": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "Load balancer to target",
+    "FromPort": 9000,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "backendecsSGEFB80C61",
+      "GroupId"
+     ]
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "backendelbdevelopSecurityGroup9B78FC14",
+      "GroupId"
+     ]
+    },
+    "ToPort": 9000
+   }
+  },
+  "backendecsSGfromdevwebappBackendNodeHapiPgbackendelbsecuritygroupdevelop5336EB5C90003362FD27": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "Load balancer to target",
+    "FromPort": 9000,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "backendecsSGEFB80C61",
+      "GroupId"
+     ]
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "backendelbsecuritygroupdevelop0DEDF79C",
+      "GroupId"
+     ]
+    },
+    "ToPort": 9000
+   }
+  },
+  "backenddatabasesecuritygroupdevelopB7AFB149": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "dev-web-app-BackendNodeHapiPg/backend-database-security-group-develop",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "255.255.255.255/32",
+      "Description": "Disallow all traffic",
+      "FromPort": 252,
+      "IpProtocol": "icmp",
+      "ToPort": 86
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "VpcId": {
+     "Ref": "backendvpcdevelopD77C39DE"
+    }
+   }
+  },
+  "backenddatabasesecuritygroupdevelopfromdevwebappBackendNodeHapiPgbackendecsSG555AC1E754328FEEF917": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "Permit the database to accept requests from the fargate service",
+    "FromPort": 5432,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "backenddatabasesecuritygroupdevelopB7AFB149",
+      "GroupId"
+     ]
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "backendecsSGEFB80C61",
+      "GroupId"
+     ]
+    },
+    "ToPort": 5432
+   }
+  },
+  "backenddatabasecredentialssecretdevelop0459C4C0": {
+   "Type": "AWS::SecretsManager::Secret",
+   "Properties": {
+    "Description": "Database credentials for backend-develop",
+    "GenerateSecretString": {
+     "ExcludeCharacters": "\"@/\\ '",
+     "GenerateStringKey": "password",
+     "PasswordLength": 30,
+     "SecretStringTemplate": "{\"username\":\"username\"}"
+    },
+    "Name": "backend-database-credentials-develop",
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "backenddatabasecredentialssecretdevelopAttachment89251DA0": {
+   "Type": "AWS::SecretsManager::SecretTargetAttachment",
+   "Properties": {
+    "SecretId": {
+     "Ref": "backenddatabasecredentialssecretdevelop0459C4C0"
+    },
+    "TargetId": {
+     "Ref": "backenddatabaseinstancedevelop0D44DC78"
+    },
+    "TargetType": "AWS::RDS::DBInstance"
+   }
+  },
+  "backenddatabaseinstancedevelopSubnetGroupC4DA765F": {
+   "Type": "AWS::RDS::DBSubnetGroup",
+   "Properties": {
+    "DBSubnetGroupDescription": "Subnet group for backend-database-instance-develop database",
+    "SubnetIds": [
+     {
+      "Ref": "backendvpcdevelopprivatesubnetSubnet1SubnetB9DB15DB"
+     },
+     {
+      "Ref": "backendvpcdevelopprivatesubnetSubnet2Subnet8E63D026"
+     },
+     {
+      "Ref": "backendvpcdevelopprivatesubnetSubnet3Subnet3C938309"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "backenddatabaseinstancedevelop0D44DC78": {
+   "Type": "AWS::RDS::DBInstance",
+   "Properties": {
+    "AllocatedStorage": "10",
+    "BackupRetentionPeriod": 1,
+    "CopyTagsToSnapshot": true,
+    "DBInstanceClass": "db.t3.micro",
+    "DBName": "backend_database_develop",
+    "DBSubnetGroupName": {
+     "Ref": "backenddatabaseinstancedevelopSubnetGroupC4DA765F"
+    },
+    "Engine": "postgres",
+    "EngineVersion": "14.2",
+    "MasterUsername": "username",
+    "MasterUserPassword": {
+     "Fn::Join": [
+      "",
+      [
+       "{{resolve:secretsmanager:",
+       {
+        "Ref": "backenddatabasecredentialssecretdevelop0459C4C0"
+       },
+       ":SecretString:password::}}"
+      ]
+     ]
+    },
+    "MaxAllocatedStorage": 30,
+    "PubliclyAccessible": false,
+    "StorageType": "gp2",
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "VPCSecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "backenddatabasesecuritygroupdevelopB7AFB149",
+       "GroupId"
+      ]
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "backendredissubnetgroupdevelop": {
+   "Type": "AWS::ElastiCache::SubnetGroup",
+   "Properties": {
+    "Description": "Subnet group for the redis cluster",
+    "SubnetIds": [
+     {
+      "Ref": "backendvpcdevelopprivatesubnetSubnet1SubnetB9DB15DB"
+     },
+     {
+      "Ref": "backendvpcdevelopprivatesubnetSubnet2Subnet8E63D026"
+     },
+     {
+      "Ref": "backendvpcdevelopprivatesubnetSubnet3Subnet3C938309"
+     }
+    ],
+    "CacheSubnetGroupName": "backend-redis-subnet-group-develop",
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "backendredissecuritygroupdevelop62B409A1": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Security group for the redis cluster",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "VpcId": {
+     "Ref": "backendvpcdevelopD77C39DE"
+    }
+   }
+  },
+  "backendredissecuritygroupdevelopfromdevwebappBackendNodeHapiPgbackendecsSG555AC1E76379A2E54E67": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "Permit the redis cluster to accept requests from the fargate service",
+    "FromPort": 6379,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "backendredissecuritygroupdevelop62B409A1",
+      "GroupId"
+     ]
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "backendecsSGEFB80C61",
+      "GroupId"
+     ]
+    },
+    "ToPort": 6379
+   }
+  },
+  "backendrediscachedevelop": {
+   "Type": "AWS::ElastiCache::CacheCluster",
+   "Properties": {
+    "CacheNodeType": "cache.t3.micro",
+    "Engine": "redis",
+    "NumCacheNodes": 1,
+    "CacheSubnetGroupName": {
+     "Ref": "backendredissubnetgroupdevelop"
+    },
+    "ClusterName": "backend-redis-cluster-develop",
+    "EngineVersion": "6.2",
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "VpcSecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "backendredissecuritygroupdevelop62B409A1",
+       "GroupId"
+      ]
+     }
+    ]
+   },
+   "DependsOn": [
+    "backendredissubnetgroupdevelop"
+   ]
+  },
+  "backendclusterB739C427": {
+   "Type": "AWS::ECS::Cluster",
+   "Properties": {
+    "ClusterName": "backend-cluster-develop",
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "backendelbdevelop23FB0BCE": {
+   "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+   "Properties": {
+    "LoadBalancerAttributes": [
+     {
+      "Key": "deletion_protection.enabled",
+      "Value": "false"
+     }
+    ],
+    "Name": "backend-elb-develop",
+    "Scheme": "internet-facing",
+    "SecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "backendelbdevelopSecurityGroup9B78FC14",
+       "GroupId"
+      ]
+     },
+     {
+      "Fn::GetAtt": [
+       "backendelbsecuritygroupdevelop0DEDF79C",
+       "GroupId"
+      ]
+     }
+    ],
+    "Subnets": [
+     {
+      "Ref": "backendvpcdeveloppublicsubnetSubnet1Subnet05F6E0BF"
+     },
+     {
+      "Ref": "backendvpcdeveloppublicsubnetSubnet2SubnetF1E64EC8"
+     },
+     {
+      "Ref": "backendvpcdeveloppublicsubnetSubnet3Subnet254CD5FB"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "Type": "application"
+   },
+   "DependsOn": [
+    "backendvpcdeveloppublicsubnetSubnet1DefaultRoute1D70EDBE",
+    "backendvpcdeveloppublicsubnetSubnet1RouteTableAssociation4639C9F4",
+    "backendvpcdeveloppublicsubnetSubnet2DefaultRoute5F1646B3",
+    "backendvpcdeveloppublicsubnetSubnet2RouteTableAssociation41765F5E",
+    "backendvpcdeveloppublicsubnetSubnet3DefaultRoute69B080AD",
+    "backendvpcdeveloppublicsubnetSubnet3RouteTableAssociation2FCFB296"
+   ]
+  },
+  "backendelbdevelopSecurityGroup9B78FC14": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Automatically created Security Group for ELB devwebappBackendNodeHapiPgbackendelbdevelop88AB0BF8",
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow from anyone on port 80",
+      "FromPort": 80,
+      "IpProtocol": "tcp",
+      "ToPort": 80
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "VpcId": {
+     "Ref": "backendvpcdevelopD77C39DE"
+    }
+   }
+  },
+  "backendelbdevelopSecurityGrouptodevwebappBackendNodeHapiPgbackendecsSG555AC1E79000F3DA8757": {
+   "Type": "AWS::EC2::SecurityGroupEgress",
+   "Properties": {
+    "GroupId": {
+     "Fn::GetAtt": [
+      "backendelbdevelopSecurityGroup9B78FC14",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "Description": "Load balancer to target",
+    "DestinationSecurityGroupId": {
+     "Fn::GetAtt": [
+      "backendecsSGEFB80C61",
+      "GroupId"
+     ]
+    },
+    "FromPort": 9000,
+    "ToPort": 9000
+   }
+  },
+  "backendelbdevelopListenerCB705F99": {
+   "Type": "AWS::ElasticLoadBalancingV2::Listener",
+   "Properties": {
+    "DefaultActions": [
+     {
+      "TargetGroupArn": {
+       "Ref": "backendtargetdevelopBB1237CC"
+      },
+      "Type": "forward"
+     }
+    ],
+    "LoadBalancerArn": {
+     "Ref": "backendelbdevelop23FB0BCE"
+    },
+    "Port": 80,
+    "Protocol": "HTTP"
+   }
+  },
+  "backendtargetdevelopBB1237CC": {
+   "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+   "Properties": {
+    "HealthCheckPath": "/",
+    "HealthCheckProtocol": "HTTP",
+    "Port": 80,
+    "Protocol": "HTTP",
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "TargetGroupAttributes": [
+     {
+      "Key": "stickiness.enabled",
+      "Value": "false"
+     }
+    ],
+    "TargetType": "ip",
+    "VpcId": {
+     "Ref": "backendvpcdevelopD77C39DE"
+    }
+   }
+  },
+  "backendtaskroledevelopF71616F8": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Description": "Role that the api task definitions use to run the api code",
+    "RoleName": "backend-task-role-develop",
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "backendtaskroledevelopDefaultPolicy4085D53F": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "secretsmanager:GetSecretValue",
+        "secretsmanager:DescribeSecret"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Ref": "backenddatabasecredentialssecretdevelop0459C4C0"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "backendtaskroledevelopDefaultPolicy4085D53F",
+    "Roles": [
+     {
+      "Ref": "backendtaskroledevelopF71616F8"
+     }
+    ]
+   }
+  },
+  "backendtaskdevelopF494421E": {
+   "Type": "AWS::ECS::TaskDefinition",
+   "Properties": {
+    "ContainerDefinitions": [
+     {
+      "Environment": [
+       {
+        "Name": "BUILD_NAME",
+        "Value": "develop"
+       },
+       {
+        "Name": "ENVIRONMENT_NAME",
+        "Value": "development"
+       },
+       {
+        "Name": "DB_URI",
+        "Value": {
+         "Fn::Join": [
+          "",
+          [
+           "postgres://{{resolve:secretsmanager:",
+           {
+            "Ref": "backenddatabasecredentialssecretdevelop0459C4C0"
+           },
+           ":SecretString:username::}}:{{resolve:secretsmanager:",
+           {
+            "Ref": "backenddatabasecredentialssecretdevelop0459C4C0"
+           },
+           ":SecretString:password::}}@",
+           {
+            "Fn::GetAtt": [
+             "backenddatabaseinstancedevelop0D44DC78",
+             "Endpoint.Address"
+            ]
+           },
+           "/backend_database_develop"
+          ]
+         ]
+        }
+       },
+       {
+        "Name": "POSTGRES_HOST",
+        "Value": {
+         "Fn::GetAtt": [
+          "backenddatabaseinstancedevelop0D44DC78",
+          "Endpoint.Address"
+         ]
+        }
+       },
+       {
+        "Name": "REDIS_HOST",
+        "Value": {
+         "Fn::GetAtt": [
+          "backendrediscachedevelop",
+          "RedisEndpoint.Address"
+         ]
+        }
+       }
+      ],
+      "Essential": true,
+      "Image": {
+       "Fn::Sub": "511522223657.dkr.ecr.ap-south-1.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-511522223657-ap-south-1:7b5e67a131c945f51c6b511bc5e8c62726475649630c944b26e3b6b3fd678fdd"
+      },
+      "LogConfiguration": {
+       "LogDriver": "awslogs",
+       "Options": {
+        "awslogs-group": {
+         "Ref": "backendtaskdevelopbackendcontainerdevelopLogGroup55D45150"
+        },
+        "awslogs-stream-prefix": "backend-log-group-develop",
+        "awslogs-region": "ap-south-1"
+       }
+      },
+      "Memory": 512,
+      "Name": "backend-container-develop",
+      "PortMappings": [
+       {
+        "ContainerPort": 9000,
+        "Protocol": "tcp"
+       }
+      ]
+     }
+    ],
+    "Cpu": "256",
+    "ExecutionRoleArn": {
+     "Fn::GetAtt": [
+      "backendtaskdevelopExecutionRole0DD8755A",
+      "Arn"
+     ]
+    },
+    "Family": "backend-task-definition-develop",
+    "Memory": "512",
+    "NetworkMode": "awsvpc",
+    "RequiresCompatibilities": [
+     "EC2",
+     "FARGATE"
+    ],
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "TaskRoleArn": {
+     "Fn::GetAtt": [
+      "backendtaskroledevelopF71616F8",
+      "Arn"
+     ]
+    }
+   }
+  },
+  "backendtaskdevelopbackendcontainerdevelopLogGroup55D45150": {
+   "Type": "AWS::Logs::LogGroup",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "backendtaskdevelopExecutionRole0DD8755A": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ]
+   }
+  },
+  "backendtaskdevelopExecutionRoleDefaultPolicyA1162041": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchGetImage"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":ecr:ap-south-1:511522223657:repository/cdk-hnb659fds-container-assets-511522223657-ap-south-1"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": "ecr:GetAuthorizationToken",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "backendtaskdevelopbackendcontainerdevelopLogGroup55D45150",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "backendtaskdevelopExecutionRoleDefaultPolicyA1162041",
+    "Roles": [
+     {
+      "Ref": "backendtaskdevelopExecutionRole0DD8755A"
+     }
+    ]
+   }
+  },
+  "backendservicedevelopService36EA188C": {
+   "Type": "AWS::ECS::Service",
+   "Properties": {
+    "Cluster": {
+     "Ref": "backendclusterB739C427"
+    },
+    "DeploymentConfiguration": {
+     "MaximumPercent": 200,
+     "MinimumHealthyPercent": 50
+    },
+    "DesiredCount": 1,
+    "EnableECSManagedTags": false,
+    "HealthCheckGracePeriodSeconds": 60,
+    "LaunchType": "FARGATE",
+    "LoadBalancers": [
+     {
+      "ContainerName": "backend-container-develop",
+      "ContainerPort": 9000,
+      "TargetGroupArn": {
+       "Ref": "backendtargetdevelopBB1237CC"
+      }
+     }
+    ],
+    "NetworkConfiguration": {
+     "AwsvpcConfiguration": {
+      "AssignPublicIp": "ENABLED",
+      "SecurityGroups": [
+       {
+        "Fn::GetAtt": [
+         "backendecsSGEFB80C61",
+         "GroupId"
+        ]
+       }
+      ],
+      "Subnets": [
+       {
+        "Ref": "backendvpcdeveloppublicsubnetSubnet1Subnet05F6E0BF"
+       },
+       {
+        "Ref": "backendvpcdeveloppublicsubnetSubnet2SubnetF1E64EC8"
+       },
+       {
+        "Ref": "backendvpcdeveloppublicsubnetSubnet3Subnet254CD5FB"
+       }
+      ]
+     }
+    },
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "web-app"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "dev"
+     }
+    ],
+    "TaskDefinition": {
+     "Ref": "backendtaskdevelopF494421E"
+    }
+   },
+   "DependsOn": [
+    "backendelbdevelopListenerCB705F99"
+   ]
+  }
+ },
+ "Outputs": {
+  "databaseHost": {
+   "Value": {
+    "Fn::GetAtt": [
+     "backenddatabaseinstancedevelop0D44DC78",
+     "Endpoint.Address"
+    ]
+   }
+  },
+  "databaseName": {
+   "Value": "backend_database_develop"
+  },
+  "redisHost": {
+   "Value": {
+    "Fn::GetAtt": [
+     "backendrediscachedevelop",
+     "RedisEndpoint.Address"
+    ]
+   }
+  },
+  "loadBalancerDns": {
+   "Value": {
+    "Fn::GetAtt": [
+     "backendelbdevelop23FB0BCE",
+     "DNSName"
+    ]
+   }
+  },
+  "awsRegion": {
+   "Value": "ap-south-1"
+  },
+  "elasticContainerRegistryRepo": {
+   "Value": "cdk-hnb659fds-container-assets-511522223657-ap-south-1"
+  },
+  "image": {
+   "Value": {
+    "Fn::Sub": "511522223657.dkr.ecr.ap-south-1.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-511522223657-ap-south-1:7b5e67a131c945f51c6b511bc5e8c62726475649630c944b26e3b6b3fd678fdd"
+   }
+  },
+  "taskDefinition": {
+   "Value": {
+    "Ref": "backendtaskdevelopF494421E"
+   }
+  },
+  "taskRole": {
+   "Value": {
+    "Fn::GetAtt": [
+     "backendtaskroledevelopF71616F8",
+     "Arn"
+    ]
+   }
+  },
+  "executionRole": {
+   "Value": {
+    "Fn::GetAtt": [
+     "backendtaskdevelopExecutionRole0DD8755A",
+     "Arn"
+    ]
+   }
+  },
+  "family": {
+   "Value": "backend-task-definition-develop"
+  },
+  "containerName": {
+   "Value": "backend-container-develop"
+  },
+  "containerPort": {
+   "Value": "9000"
+  },
+  "logDriver": {
+   "Value": "awslogs"
+  },
+  "logDriverOptions": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "{\"awslogs-group\":\"",
+      {
+       "Ref": "backendtaskdevelopbackendcontainerdevelopLogGroup55D45150"
+      },
+      "\",\"awslogs-stream-prefix\":\"backend-log-group-develop\",\"awslogs-region\":\"ap-south-1\"}"
+     ]
+    ]
+   }
+  },
+  "serviceName": {
+   "Value": {
+    "Fn::GetAtt": [
+     "backendservicedevelopService36EA188C",
+     "Name"
+    ]
+   }
+  },
+  "clusterName": {
+   "Value": {
+    "Ref": "backendclusterB739C427"
+   }
+  },
+  "secretName": {
+   "Value": {
+    "Fn::Join": [
+     "-",
+     [
+      {
+       "Fn::Select": [
+        0,
+        {
+         "Fn::Split": [
+          "-",
+          {
+           "Fn::Select": [
+            6,
+            {
+             "Fn::Split": [
+              ":",
+              {
+               "Ref": "backenddatabasecredentialssecretdevelop0459C4C0"
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "Fn::Select": [
+        1,
+        {
+         "Fn::Split": [
+          "-",
+          {
+           "Fn::Select": [
+            6,
+            {
+             "Fn::Split": [
+              ":",
+              {
+               "Ref": "backenddatabasecredentialssecretdevelop0459C4C0"
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "Fn::Select": [
+        2,
+        {
+         "Fn::Split": [
+          "-",
+          {
+           "Fn::Select": [
+            6,
+            {
+             "Fn::Split": [
+              ":",
+              {
+               "Ref": "backenddatabasecredentialssecretdevelop0459C4C0"
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "Fn::Select": [
+        3,
+        {
+         "Fn::Split": [
+          "-",
+          {
+           "Fn::Select": [
+            6,
+            {
+             "Fn::Split": [
+              ":",
+              {
+               "Ref": "backenddatabasecredentialssecretdevelop0459C4C0"
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    ]
+   }
+  },
+  "secretArn": {
+   "Value": {
+    "Ref": "backenddatabasecredentialssecretdevelop0459C4C0"
+   }
+  },
+  "secretFullArn": {
+   "Value": {
+    "Ref": "backenddatabasecredentialssecretdevelop0459C4C0"
+   }
+  },
+  "SSTMetadata": {
+   "Value": "{\"app\":\"web-app\",\"stage\":\"dev\",\"version\":\"2.8.3\",\"metadata\":[]}"
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

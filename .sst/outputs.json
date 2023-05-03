@@ -1,0 +1,28 @@
+{
+  "dev-web-app-BackendNodeHapiPg": {
+    "redisHost": "backend-redis-cluster-develop.9txi6w.0001.aps1.cache.amazonaws.com",
+    "image": "511522223657.dkr.ecr.ap-south-1.amazonaws.com/cdk-hnb659fds-container-assets-511522223657-ap-south-1:7b5e67a131c945f51c6b511bc5e8c62726475649630c944b26e3b6b3fd678fdd",
+    "secretFullArn": "arn:aws:secretsmanager:ap-south-1:511522223657:secret:backend-database-credentials-develop-eFhHUF",
+    "awsRegion": "ap-south-1",
+    "secretName": "backend-database-credentials-develop",
+    "databaseHost": "dev-web-app-backendnodeha-backenddatabaseinstanced-ychgedohucpt.cvnyo3tm4lck.ap-south-1.rds.amazonaws.com",
+    "databaseName": "backend_database_develop",
+    "secretArn": "arn:aws:secretsmanager:ap-south-1:511522223657:secret:backend-database-credentials-develop-eFhHUF",
+    "logDriver": "awslogs",
+    "loadBalancerDns": "backend-elb-develop-1821022347.ap-south-1.elb.amazonaws.com",
+    "logDriverOptions": {
+      "awslogs-group": "dev-web-app-BackendNodeHapiPg-backendtaskdevelopbackendcontainerdevelopLogGroup55D45150-MrMgQACeujJq",
+      "awslogs-stream-prefix": "backend-log-group-develop",
+      "awslogs-region": "ap-south-1"
+    },
+    "serviceName": "dev-web-app-BackendNodeHapiPg-backendservicedevelopService36EA188C-aAX4rea6z20Q",
+    "containerName": "backend-container-develop",
+    "taskRole": "arn:aws:iam::511522223657:role/backend-task-role-develop",
+    "clusterName": "backend-cluster-develop",
+    "elasticContainerRegistryRepo": "cdk-hnb659fds-container-assets-511522223657-ap-south-1",
+    "containerPort": "9000",
+    "executionRole": "arn:aws:iam::511522223657:role/dev-web-app-BackendNodeHa-backendtaskdevelopExecut-5JH0617LEP3K",
+    "taskDefinition": "arn:aws:ecs:ap-south-1:511522223657:task-definition/backend-task-definition-develop:1",
+    "family": "backend-task-definition-develop"
+  }
+}
