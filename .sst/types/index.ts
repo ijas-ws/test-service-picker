@@ -4,11 +4,4 @@ declare module "sst/node/config" {
     APP: string;
     STAGE: string;
   }
-}import "sst/node/site";
-declare module "sst/node/site" {
-  export interface StaticSiteResources {
-    "FetestNextJsWebSite": {
-      url: string;
-    }
-  }
 }
