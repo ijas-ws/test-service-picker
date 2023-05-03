@@ -1,6 +1,5 @@
 import dotenv from "dotenv";
-import { FetestNextJsWeb } from "./stacks/FetestNextJsWeb";
-import { BetestNodeHapiPg } from "./stacks/BetestNodeHapiPg";
+import { BackendNodeHapiPg } from "./stacks/BackendNodeHapiPg";
 
 dotenv.config({ path: ".env" });
 
@@ -13,6 +12,6 @@ export default {
 	},
 	stacks(app) {
 		// deploy stacks
-		app.stack(FetestNextJsWeb).stack(BetestNodeHapiPg);
+		app.stack(BackendNodeHapiPg);
 	},
 };
