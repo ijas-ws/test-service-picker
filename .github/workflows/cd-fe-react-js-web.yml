@@ -37,9 +37,9 @@ jobs:
       - name: Set short environment name
         id: environment
         run: |
-          if [[ {{ steps.vars.outputs.short_ref }} == master ]]; then
+          if [[ ${{ steps.vars.outputs.short_ref }} == master ]]; then
                echo ::set-output name=short_env::prod
-          elif [[ {{ steps.vars.outputs.short_ref }} == qa ]]; then
+          elif [[ ${{ steps.vars.outputs.short_ref }} == qa ]]; then
                echo ::set-output name=short_env::qa
           else
                echo ::set-output name=short_env::dev
