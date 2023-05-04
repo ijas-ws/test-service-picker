@@ -5,6 +5,7 @@ on:
       - master
       - develop
       - qa
+    paths: "fe-react-js-web/**"
 
 jobs:
   deploy:
