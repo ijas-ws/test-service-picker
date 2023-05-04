@@ -11,9 +11,12 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/qa'
+    defaults:
+      run:
+        working-directory: ./fe-react-js-web
     strategy:
       matrix:
-        node-version: [16.13.0]
+        node-version: [16.14.x]
     env:
       SOURCE_DIR: "./build/"
       AWS_REGION: ${{ secrets.AWS_REGION }}
