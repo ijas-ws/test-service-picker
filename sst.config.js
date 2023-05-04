@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { BackendNodeHapiPg } from "./stacks/BackendNodeHapiPg";
+import { FeReactJsWeb } from "./stacks/FeReactJsWeb";
 
 dotenv.config({ path: ".env" });
 
@@ -12,6 +12,6 @@ export default {
 	},
 	stacks(app) {
 		// deploy stacks
-		app.stack(BackendNodeHapiPg);
+		app.stack(FeReactJsWeb);
 	},
 };
